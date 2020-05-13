@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <title>Project</title>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Content here -->
+        <!-- As a heading -->
+        <nav class="navbar navbar-light">
+            <span class="navbar-brand mb-0 h1">Project</span>
+        </nav>
+        <div class="row">
+            <div class="col-3" id="title">
+                <div class="list-group list-group-flush" id="list-tab" role="tablist">
+                    <a class="list-group-item list-group-item-action active" id="dash-board-list" data-toggle="list"
+                        href="#dash-board" role="tab" aria-controls="home">Dashboard</a>
+                    <a class="list-group-item list-group-item-action" id="controller-list" data-toggle="list"
+                        href="#controller" role="tab" aria-controls="profile">Controller</a>
+                    <a class="list-group-item list-group-item-action" id="report-list" data-toggle="list" href="#report"
+                        role="tab" aria-controls="messages">Report</a>
+                    <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list"
+                        href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+                </div>
+            </div>
+            <div class="col-9" id="content">
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="dash-board" role="tabpanel"
+                        aria-labelledby="dash-board-list">
+                        <h1>Dashboard</h1>
+                        <div id="chart_div">
+                            <script>
+                                google.charts.load('current', { packages: ['corechart', 'line'] });
+                                google.charts.setOnLoadCallback(drawCurveTypes);
+
+                                function drawCurveTypes() {
+                                    var data = new google.visualization.DataTable();
+                                    data.addColumn('number', 'X');
+                                    data.addColumn('number', 'L1');
+                                    data.addColumn('number', 'L2');
+                                    data.addColumn('number', 'L3');
+                                    data.addColumn('number', 'L4');
+
+                                    data.addRows([
+
+                                    ]);
+
+                                    var options = {
+                                        hAxis: {
+                                            title: 'Time(s)'
+                                        },
+                                        vAxis: {
+                                            title: 'Light intensity'
+                                        },
+                                        series: {
+                                            1: { curveType: 'function' }
+                                        }
+                                    };
+
+                                    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+                                    chart.draw(data, options);
+                                }
+                            </script>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="controller" role="tabpanel" aria-labelledby="controller-list">
+                        <h1>Controller</h1>
+                        <div id="card-group">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Light 1</h5>
+                                    <p class="card-text">Toggle to turn on/off</p>
+                                    <!-- Rectangular switch -->
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Light 2</h5>
+                                    <p class="card-text">Toggle to turn on/off</p>
+                                    <!-- Rectangular switch -->
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Light 3</h5>
+                                    <p class="card-text">Toggle to turn on/off</p>
+                                    <!-- Rectangular switch -->
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Light 4</h5>
+                                    <p class="card-text">Toggle to turn on/off</p>
+                                    <!-- Rectangular switch -->
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="report" role="tabpanel" aria-labelledby="report-list">
+                        <h1>Report</h1>
+                        <div id="report-content">
+                            <div id="light-list" class="list-group">
+                                <a class="list-group-item list-group-item-action" href="#list-item-1">Light 1</a>
+                                <a class="list-group-item list-group-item-action" href="#list-item-2">Light 2</a>
+                                <a class="list-group-item list-group-item-action" href="#list-item-3">Light 3</a>
+                                <a class="list-group-item list-group-item-action" href="#list-item-4">Light 4</a>
+                            </div>
+                            <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example"
+                                id="report-list">
+                                <h4 id="list-item-1">Light 1</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua. Velit sed ullamcorper morbi tincidunt.
+                                    Vitae nunc sed velit dignissim sodales ut. Maecenas ultricies mi eget mauris.
+                                    Sagittis purus sit amet volutpat consequat mauris. Mi tempus imperdiet nulla
+                                    malesuada pellentesque elit eget. Condimentum mattis pellentesque id nibh tortor.
+                                    Habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper.
+                                    Aliquam sem fringilla ut morbi tincidunt augue interdum. Ultrices gravida dictum
+                                    fusce ut placerat orci. Erat imperdiet sed euismod nisi porta lorem mollis. Ornare
+                                    aenean euismod elementum nisi quis eleifend quam. Aliquam id diam maecenas ultricies
+                                    mi eget mauris pharetra et. Gravida neque convallis a cras. Convallis aenean et
+                                    tortor at risus.
+
+                                    Risus quis varius quam quisque. In hac habitasse platea dictumst quisque sagittis
+                                    purus sit. Habitasse platea dictumst quisque sagittis purus sit. Phasellus egestas
+                                    tellus rutrum tellus pellentesque eu. Laoreet id donec ultrices tincidunt. Neque
+                                    viverra justo nec ultrices dui. Habitant morbi tristique senectus et netus et
+                                    malesuada. Quis commodo odio aenean sed adipiscing diam donec. Convallis posuere
+                                    morbi leo urna molestie. In arcu cursus euismod quis viverra nibh cras pulvinar
+                                    mattis. Egestas fringilla phasellus faucibus scelerisque eleifend donec pretium
+                                    vulputate. Eu ultrices vitae auctor eu augue ut lectus arcu. Eu non diam phasellus
+                                    vestibulum lorem sed risus ultricies. Aliquet eget sit amet tellus.
+
+                                    Aliquet risus feugiat in ante. A diam maecenas sed enim. Amet consectetur adipiscing
+                                    elit pellentesque habitant morbi tristique senectus. Pulvinar neque laoreet
+                                    suspendisse interdum. Commodo quis imperdiet massa tincidunt. Lacus suspendisse
+                                    faucibus interdum posuere lorem ipsum. Ullamcorper malesuada proin libero nunc
+                                    consequat interdum varius sit amet. Imperdiet proin fermentum leo vel orci. Non nisi
+                                    est sit amet facilisis. Condimentum lacinia quis vel eros donec ac. Eros in cursus
+                                    turpis massa tincidunt dui ut. Suspendisse faucibus interdum posuere lorem ipsum
+                                    dolor sit amet. Augue ut lectus arcu bibendum at varius. Nam aliquam sem et tortor
+                                    consequat id porta nibh. Semper risus in hendrerit gravida rutrum. Semper viverra
+                                    nam libero justo laoreet sit amet cursus. Interdum consectetur libero id faucibus
+                                    nisl tincidunt. Quam pellentesque nec nam aliquam sem. Dignissim suspendisse in est
+                                    ante in nibh mauris cursus.
+
+                                    Fermentum leo vel orci porta non pulvinar neque. Id porta nibh venenatis cras sed
+                                    felis. Fames ac turpis egestas integer eget aliquet nibh. Netus et malesuada fames
+                                    ac turpis. Facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum
+                                    dui. Nunc sed blandit libero volutpat sed cras ornare. Dis parturient montes
+                                    nascetur ridiculus mus mauris vitae ultricies leo. Erat nam at lectus urna. Vel quam
+                                    elementum pulvinar etiam. Velit laoreet id donec ultrices. Adipiscing tristique
+                                    risus nec feugiat in fermentum posuere urna. Risus commodo viverra maecenas accumsan
+                                    lacus.
+
+                                    Neque viverra justo nec ultrices dui. Et egestas quis ipsum suspendisse ultrices
+                                    gravida dictum fusce. Ac tortor vitae purus faucibus ornare. Lacus sed viverra
+                                    tellus in hac habitasse platea dictumst. Morbi tristique senectus et netus et
+                                    malesuada. Sed adipiscing diam donec adipiscing tristique risus nec feugiat in. Vel
+                                    eros donec ac odio. Natoque penatibus et magnis dis parturient. Dignissim cras
+                                    tincidunt lobortis feugiat. Mi ipsum faucibus vitae aliquet. Morbi quis commodo odio
+                                    aenean sed adipiscing diam.</p>
+                                <h4 id="list-item-2">Light 2</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua. Velit sed ullamcorper morbi tincidunt.
+                                    Vitae nunc sed velit dignissim sodales ut. Maecenas ultricies mi eget mauris.
+                                    Sagittis purus sit amet volutpat consequat mauris. Mi tempus imperdiet nulla
+                                    malesuada pellentesque elit eget. Condimentum mattis pellentesque id nibh tortor.
+                                    Habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper.
+                                    Aliquam sem fringilla ut morbi tincidunt augue interdum. Ultrices gravida dictum
+                                    fusce ut placerat orci. Erat imperdiet sed euismod nisi porta lorem mollis. Ornare
+                                    aenean euismod elementum nisi quis eleifend quam. Aliquam id diam maecenas ultricies
+                                    mi eget mauris pharetra et. Gravida neque convallis a cras. Convallis aenean et
+                                    tortor at risus.
+
+                                    Risus quis varius quam quisque. In hac habitasse platea dictumst quisque sagittis
+                                    purus sit. Habitasse platea dictumst quisque sagittis purus sit. Phasellus egestas
+                                    tellus rutrum tellus pellentesque eu. Laoreet id donec ultrices tincidunt. Neque
+                                    viverra justo nec ultrices dui. Habitant morbi tristique senectus et netus et
+                                    malesuada. Quis commodo odio aenean sed adipiscing diam donec. Convallis posuere
+                                    morbi leo urna molestie. In arcu cursus euismod quis viverra nibh cras pulvinar
+                                    mattis. Egestas fringilla phasellus faucibus scelerisque eleifend donec pretium
+                                    vulputate. Eu ultrices vitae auctor eu augue ut lectus arcu. Eu non diam phasellus
+                                    vestibulum lorem sed risus ultricies. Aliquet eget sit amet tellus.
+
+                                    Aliquet risus feugiat in ante. A diam maecenas sed enim. Amet consectetur adipiscing
+                                    elit pellentesque habitant morbi tristique senectus. Pulvinar neque laoreet
+                                    suspendisse interdum. Commodo quis imperdiet massa tincidunt. Lacus suspendisse
+                                    faucibus interdum posuere lorem ipsum. Ullamcorper malesuada proin libero nunc
+                                    consequat interdum varius sit amet. Imperdiet proin fermentum leo vel orci. Non nisi
+                                    est sit amet facilisis. Condimentum lacinia quis vel eros donec ac. Eros in cursus
+                                    turpis massa tincidunt dui ut. Suspendisse faucibus interdum posuere lorem ipsum
+                                    dolor sit amet. Augue ut lectus arcu bibendum at varius. Nam aliquam sem et tortor
+                                    consequat id porta nibh. Semper risus in hendrerit gravida rutrum. Semper viverra
+                                    nam libero justo laoreet sit amet cursus. Interdum consectetur libero id faucibus
+                                    nisl tincidunt. Quam pellentesque nec nam aliquam sem. Dignissim suspendisse in est
+                                    ante in nibh mauris cursus.
+
+                                    Fermentum leo vel orci porta non pulvinar neque. Id porta nibh venenatis cras sed
+                                    felis. Fames ac turpis egestas integer eget aliquet nibh. Netus et malesuada fames
+                                    ac turpis. Facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum
+                                    dui. Nunc sed blandit libero volutpat sed cras ornare. Dis parturient montes
+                                    nascetur ridiculus mus mauris vitae ultricies leo. Erat nam at lectus urna. Vel quam
+                                    elementum pulvinar etiam. Velit laoreet id donec ultrices. Adipiscing tristique
+                                    risus nec feugiat in fermentum posuere urna. Risus commodo viverra maecenas accumsan
+                                    lacus.
+
+                                    Neque viverra justo nec ultrices dui. Et egestas quis ipsum suspendisse ultrices
+                                    gravida dictum fusce. Ac tortor vitae purus faucibus ornare. Lacus sed viverra
+                                    tellus in hac habitasse platea dictumst. Morbi tristique senectus et netus et
+                                    malesuada. Sed adipiscing diam donec adipiscing tristique risus nec feugiat in. Vel
+                                    eros donec ac odio. Natoque penatibus et magnis dis parturient. Dignissim cras
+                                    tincidunt lobortis feugiat. Mi ipsum faucibus vitae aliquet. Morbi quis commodo odio
+                                    aenean sed adipiscing diam.</p>
+                                <h4 id="list-item-3">Light 3</h4>
+                                <p>...</p>
+                                <h4 id="list-item-4">Light 4</h4>
+                                <p>...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
+                        <h1>Setting</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
