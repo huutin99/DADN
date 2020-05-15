@@ -31,8 +31,8 @@
                         href="#controller" role="tab" aria-controls="profile">Controller</a>
                     <a class="list-group-item list-group-item-action" id="report-list" data-toggle="list" href="#report"
                         role="tab" aria-controls="messages">Report</a>
-                    <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list"
-                        href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+                    <a class="list-group-item list-group-item-action" id="status-list" data-toggle="list"
+                        href="#list-settings" role="tab" aria-controls="settings">Status</a>
                 </div>
             </div>
             <div class="col-9" id="content">
@@ -48,10 +48,7 @@
                                 function drawCurveTypes() {
                                     var data = new google.visualization.DataTable();
                                     data.addColumn('number', 'X');
-                                    data.addColumn('number', 'L1');
-                                    data.addColumn('number', 'L2');
-                                    data.addColumn('number', 'L3');
-                                    data.addColumn('number', 'L4');
+                                    data.addColumn('number', 'Sensor');
 
                                     data.addRows([
 
@@ -127,133 +124,157 @@
                     <div class="tab-pane fade" id="report" role="tabpanel" aria-labelledby="report-list">
                         <h1>Report</h1>
                         <div id="report-content">
-                            <div id="light-list" class="list-group">
-                                <a class="list-group-item list-group-item-action" href="#light-1">Light 1</a>
-                                <a class="list-group-item list-group-item-action" href="#light-2">Light 2</a>
-                                <a class="list-group-item list-group-item-action" href="#light-3">Light 3</a>
-                                <a class="list-group-item list-group-item-action" href="#light-4">Light 4</a>
+                            <div id="device-list">
+                                <div class="list-group" id="list-tab" role="tablist">
+                                    <a class="list-group-item list-group-item-action active list-group-item-info"
+                                        id="list-home-list" data-toggle="list" href="#report-sensor" role="tab"
+                                        aria-controls="home">Sensor
+                                        <span class="badge badge-primary badge-pill">14</span>
+                                    </a>
+                                    <a class="list-group-item list-group-item-action list-group-item-info"
+                                        id="list-profile-list" data-toggle="list" href="#report-controller" role="tab"
+                                        aria-controls="profile">Controller
+                                        <span class="badge badge-primary badge-pill">14</span>
+                                    </a>
+                                </div>
+                                <p>Choose date:</p>
+                                <input type="date" id="report-date">
                             </div>
-                            <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example"
-                                id="report-list">
-                                <h4 id="light-1">Light 1</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Velit sed ullamcorper morbi tincidunt.
-                                    Vitae nunc sed velit dignissim sodales ut. Maecenas ultricies mi eget mauris.
-                                    Sagittis purus sit amet volutpat consequat mauris. Mi tempus imperdiet nulla
-                                    malesuada pellentesque elit eget. Condimentum mattis pellentesque id nibh tortor.
-                                    Habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper.
-                                    Aliquam sem fringilla ut morbi tincidunt augue interdum. Ultrices gravida dictum
-                                    fusce ut placerat orci. Erat imperdiet sed euismod nisi porta lorem mollis. Ornare
-                                    aenean euismod elementum nisi quis eleifend quam. Aliquam id diam maecenas ultricies
-                                    mi eget mauris pharetra et. Gravida neque convallis a cras. Convallis aenean et
-                                    tortor at risus.
+                            <div id="report-list">
+                                <div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane fade show active" id="report-sensor" role="tabpanel"
+                                        aria-labelledby="list-home-list">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                        tempor incididunt ut labore et dolore magna aliqua. In mollis nunc sed id
+                                        semper risus in hendrerit. Imperdiet dui accumsan sit amet nulla facilisi
+                                        morbi tempus. Volutpat blandit aliquam etiam erat velit scelerisque. Mi sit
+                                        amet mauris commodo quis imperdiet massa. At consectetur lorem donec massa.
+                                        Augue ut lectus arcu bibendum at varius vel pharetra vel. Leo urna molestie
+                                        at elementum eu. Sed arcu non odio euismod lacinia at quis risus sed.
+                                        Suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Blandit
+                                        massa enim nec dui nunc mattis enim ut tellus. Facilisi cras fermentum odio
+                                        eu feugiat. Id neque aliquam vestibulum morbi blandit cursus risus at.
+                                        Luctus accumsan tortor posuere ac ut consequat semper viverra. Commodo elit
+                                        at imperdiet dui accumsan sit amet nulla facilisi.
 
-                                    Risus quis varius quam quisque. In hac habitasse platea dictumst quisque sagittis
-                                    purus sit. Habitasse platea dictumst quisque sagittis purus sit. Phasellus egestas
-                                    tellus rutrum tellus pellentesque eu. Laoreet id donec ultrices tincidunt. Neque
-                                    viverra justo nec ultrices dui. Habitant morbi tristique senectus et netus et
-                                    malesuada. Quis commodo odio aenean sed adipiscing diam donec. Convallis posuere
-                                    morbi leo urna molestie. In arcu cursus euismod quis viverra nibh cras pulvinar
-                                    mattis. Egestas fringilla phasellus faucibus scelerisque eleifend donec pretium
-                                    vulputate. Eu ultrices vitae auctor eu augue ut lectus arcu. Eu non diam phasellus
-                                    vestibulum lorem sed risus ultricies. Aliquet eget sit amet tellus.
+                                        Id porta nibh venenatis cras sed felis. Quis viverra nibh cras pulvinar
+                                        mattis. Felis eget nunc lobortis mattis aliquam. Commodo viverra maecenas
+                                        accumsan lacus vel facilisis. Ac tincidunt vitae semper quis lectus nulla.
+                                        Id ornare arcu odio ut sem nulla. In fermentum posuere urna nec tincidunt
+                                        praesent semper feugiat nibh. Nulla facilisi cras fermentum odio eu.
+                                        Suspendisse faucibus interdum posuere lorem ipsum dolor sit amet. Eget
+                                        nullam non nisi est sit amet facilisis.
 
-                                    Aliquet risus feugiat in ante. A diam maecenas sed enim. Amet consectetur adipiscing
-                                    elit pellentesque habitant morbi tristique senectus. Pulvinar neque laoreet
-                                    suspendisse interdum. Commodo quis imperdiet massa tincidunt. Lacus suspendisse
-                                    faucibus interdum posuere lorem ipsum. Ullamcorper malesuada proin libero nunc
-                                    consequat interdum varius sit amet. Imperdiet proin fermentum leo vel orci. Non nisi
-                                    est sit amet facilisis. Condimentum lacinia quis vel eros donec ac. Eros in cursus
-                                    turpis massa tincidunt dui ut. Suspendisse faucibus interdum posuere lorem ipsum
-                                    dolor sit amet. Augue ut lectus arcu bibendum at varius. Nam aliquam sem et tortor
-                                    consequat id porta nibh. Semper risus in hendrerit gravida rutrum. Semper viverra
-                                    nam libero justo laoreet sit amet cursus. Interdum consectetur libero id faucibus
-                                    nisl tincidunt. Quam pellentesque nec nam aliquam sem. Dignissim suspendisse in est
-                                    ante in nibh mauris cursus.
+                                        Habitant morbi tristique senectus et. Lobortis mattis aliquam faucibus
+                                        purus. Aliquam sem et tortor consequat id porta. At ultrices mi tempus
+                                        imperdiet nulla malesuada pellentesque elit. Quisque non tellus orci ac
+                                        auctor augue mauris augue neque. Duis ultricies lacus sed turpis tincidunt
+                                        id. Nec feugiat in fermentum posuere urna nec tincidunt praesent. Fermentum
+                                        leo vel orci porta. Cras adipiscing enim eu turpis egestas. Donec pretium
+                                        vulputate sapien nec. Vitae tempus quam pellentesque nec nam. Lobortis
+                                        mattis aliquam faucibus purus in massa tempor. Nulla posuere sollicitudin
+                                        aliquam ultrices sagittis. Tellus mauris a diam maecenas sed enim ut.
+                                        Rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt lobortis.
+                                        Nec sagittis aliquam malesuada bibendum arcu vitae elementum curabitur
+                                        vitae. Id aliquet risus feugiat in ante. Habitasse platea dictumst quisque
+                                        sagittis purus sit amet volutpat consequat.
 
-                                    Fermentum leo vel orci porta non pulvinar neque. Id porta nibh venenatis cras sed
-                                    felis. Fames ac turpis egestas integer eget aliquet nibh. Netus et malesuada fames
-                                    ac turpis. Facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum
-                                    dui. Nunc sed blandit libero volutpat sed cras ornare. Dis parturient montes
-                                    nascetur ridiculus mus mauris vitae ultricies leo. Erat nam at lectus urna. Vel quam
-                                    elementum pulvinar etiam. Velit laoreet id donec ultrices. Adipiscing tristique
-                                    risus nec feugiat in fermentum posuere urna. Risus commodo viverra maecenas accumsan
-                                    lacus.
+                                        Enim blandit volutpat maecenas volutpat blandit aliquam etiam. Odio morbi
+                                        quis commodo odio aenean sed. Cursus turpis massa tincidunt dui ut ornare.
+                                        Dictum non consectetur a erat nam at lectus. Id volutpat lacus laoreet non
+                                        curabitur gravida. Enim blandit volutpat maecenas volutpat blandit aliquam
+                                        etiam. Sed lectus vestibulum mattis ullamcorper. Sit amet volutpat consequat
+                                        mauris. At tempor commodo ullamcorper a lacus. Commodo quis imperdiet massa
+                                        tincidunt nunc pulvinar sapien et ligula. Donec enim diam vulputate ut.
+                                        Purus semper eget duis at tellus. Eget est lorem ipsum dolor sit amet. Non
+                                        nisi est sit amet. Vitae turpis massa sed elementum tempus egestas sed sed.
+                                        Id diam vel quam elementum. Nunc pulvinar sapien et ligula ullamcorper
+                                        malesuada proin. Lorem dolor sed viverra ipsum nunc aliquet bibendum enim.
+                                        Tempor id eu nisl nunc. Sit amet purus gravida quis.
 
-                                    Neque viverra justo nec ultrices dui. Et egestas quis ipsum suspendisse ultrices
-                                    gravida dictum fusce. Ac tortor vitae purus faucibus ornare. Lacus sed viverra
-                                    tellus in hac habitasse platea dictumst. Morbi tristique senectus et netus et
-                                    malesuada. Sed adipiscing diam donec adipiscing tristique risus nec feugiat in. Vel
-                                    eros donec ac odio. Natoque penatibus et magnis dis parturient. Dignissim cras
-                                    tincidunt lobortis feugiat. Mi ipsum faucibus vitae aliquet. Morbi quis commodo odio
-                                    aenean sed adipiscing diam.</p>
-                                <h4 id="light-2">Light 2</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Velit sed ullamcorper morbi tincidunt.
-                                    Vitae nunc sed velit dignissim sodales ut. Maecenas ultricies mi eget mauris.
-                                    Sagittis purus sit amet volutpat consequat mauris. Mi tempus imperdiet nulla
-                                    malesuada pellentesque elit eget. Condimentum mattis pellentesque id nibh tortor.
-                                    Habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper.
-                                    Aliquam sem fringilla ut morbi tincidunt augue interdum. Ultrices gravida dictum
-                                    fusce ut placerat orci. Erat imperdiet sed euismod nisi porta lorem mollis. Ornare
-                                    aenean euismod elementum nisi quis eleifend quam. Aliquam id diam maecenas ultricies
-                                    mi eget mauris pharetra et. Gravida neque convallis a cras. Convallis aenean et
-                                    tortor at risus.
+                                        Turpis egestas maecenas pharetra convallis posuere morbi leo urna molestie.
+                                        Quam nulla porttitor massa id. Tincidunt augue interdum velit euismod. Diam
+                                        maecenas sed enim ut sem viverra aliquet eget. Laoreet id donec ultrices
+                                        tincidunt arcu. Feugiat pretium nibh ipsum consequat nisl. Volutpat maecenas
+                                        volutpat blandit aliquam etiam. Quis vel eros donec ac odio. Pharetra et
+                                        ultrices neque ornare aenean euismod elementum. Habitasse platea dictumst
+                                        vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Sodales ut
+                                        etiam sit amet nisl.
+                                    </div>
+                                    <div class="tab-pane fade" id="report-monitor" role="tabpanel"
+                                        aria-labelledby="list-profile-list">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                        tempor incididunt ut labore et dolore magna aliqua. In mollis nunc sed id
+                                        semper risus in hendrerit. Imperdiet dui accumsan sit amet nulla facilisi
+                                        morbi tempus. Volutpat blandit aliquam etiam erat velit scelerisque. Mi sit
+                                        amet mauris commodo quis imperdiet massa. At consectetur lorem donec massa.
+                                        Augue ut lectus arcu bibendum at varius vel pharetra vel. Leo urna molestie
+                                        at elementum eu. Sed arcu non odio euismod lacinia at quis risus sed.
+                                        Suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Blandit
+                                        massa enim nec dui nunc mattis enim ut tellus. Facilisi cras fermentum odio
+                                        eu feugiat. Id neque aliquam vestibulum morbi blandit cursus risus at.
+                                        Luctus accumsan tortor posuere ac ut consequat semper viverra. Commodo elit
+                                        at imperdiet dui accumsan sit amet nulla facilisi.
 
-                                    Risus quis varius quam quisque. In hac habitasse platea dictumst quisque sagittis
-                                    purus sit. Habitasse platea dictumst quisque sagittis purus sit. Phasellus egestas
-                                    tellus rutrum tellus pellentesque eu. Laoreet id donec ultrices tincidunt. Neque
-                                    viverra justo nec ultrices dui. Habitant morbi tristique senectus et netus et
-                                    malesuada. Quis commodo odio aenean sed adipiscing diam donec. Convallis posuere
-                                    morbi leo urna molestie. In arcu cursus euismod quis viverra nibh cras pulvinar
-                                    mattis. Egestas fringilla phasellus faucibus scelerisque eleifend donec pretium
-                                    vulputate. Eu ultrices vitae auctor eu augue ut lectus arcu. Eu non diam phasellus
-                                    vestibulum lorem sed risus ultricies. Aliquet eget sit amet tellus.
+                                        Id porta nibh venenatis cras sed felis. Quis viverra nibh cras pulvinar
+                                        mattis. Felis eget nunc lobortis mattis aliquam. Commodo viverra maecenas
+                                        accumsan lacus vel facilisis. Ac tincidunt vitae semper quis lectus nulla.
+                                        Id ornare arcu odio ut sem nulla. In fermentum posuere urna nec tincidunt
+                                        praesent semper feugiat nibh. Nulla facilisi cras fermentum odio eu.
+                                        Suspendisse faucibus interdum posuere lorem ipsum dolor sit amet. Eget
+                                        nullam non nisi est sit amet facilisis.
 
-                                    Aliquet risus feugiat in ante. A diam maecenas sed enim. Amet consectetur adipiscing
-                                    elit pellentesque habitant morbi tristique senectus. Pulvinar neque laoreet
-                                    suspendisse interdum. Commodo quis imperdiet massa tincidunt. Lacus suspendisse
-                                    faucibus interdum posuere lorem ipsum. Ullamcorper malesuada proin libero nunc
-                                    consequat interdum varius sit amet. Imperdiet proin fermentum leo vel orci. Non nisi
-                                    est sit amet facilisis. Condimentum lacinia quis vel eros donec ac. Eros in cursus
-                                    turpis massa tincidunt dui ut. Suspendisse faucibus interdum posuere lorem ipsum
-                                    dolor sit amet. Augue ut lectus arcu bibendum at varius. Nam aliquam sem et tortor
-                                    consequat id porta nibh. Semper risus in hendrerit gravida rutrum. Semper viverra
-                                    nam libero justo laoreet sit amet cursus. Interdum consectetur libero id faucibus
-                                    nisl tincidunt. Quam pellentesque nec nam aliquam sem. Dignissim suspendisse in est
-                                    ante in nibh mauris cursus.
+                                        Habitant morbi tristique senectus et. Lobortis mattis aliquam faucibus
+                                        purus. Aliquam sem et tortor consequat id porta. At ultrices mi tempus
+                                        imperdiet nulla malesuada pellentesque elit. Quisque non tellus orci ac
+                                        auctor augue mauris augue neque. Duis ultricies lacus sed turpis tincidunt
+                                        id. Nec feugiat in fermentum posuere urna nec tincidunt praesent. Fermentum
+                                        leo vel orci porta. Cras adipiscing enim eu turpis egestas. Donec pretium
+                                        vulputate sapien nec. Vitae tempus quam pellentesque nec nam. Lobortis
+                                        mattis aliquam faucibus purus in massa tempor. Nulla posuere sollicitudin
+                                        aliquam ultrices sagittis. Tellus mauris a diam maecenas sed enim ut.
+                                        Rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt lobortis.
+                                        Nec sagittis aliquam malesuada bibendum arcu vitae elementum curabitur
+                                        vitae. Id aliquet risus feugiat in ante. Habitasse platea dictumst quisque
+                                        sagittis purus sit amet volutpat consequat.
 
-                                    Fermentum leo vel orci porta non pulvinar neque. Id porta nibh venenatis cras sed
-                                    felis. Fames ac turpis egestas integer eget aliquet nibh. Netus et malesuada fames
-                                    ac turpis. Facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum
-                                    dui. Nunc sed blandit libero volutpat sed cras ornare. Dis parturient montes
-                                    nascetur ridiculus mus mauris vitae ultricies leo. Erat nam at lectus urna. Vel quam
-                                    elementum pulvinar etiam. Velit laoreet id donec ultrices. Adipiscing tristique
-                                    risus nec feugiat in fermentum posuere urna. Risus commodo viverra maecenas accumsan
-                                    lacus.
+                                        Enim blandit volutpat maecenas volutpat blandit aliquam etiam. Odio morbi
+                                        quis commodo odio aenean sed. Cursus turpis massa tincidunt dui ut ornare.
+                                        Dictum non consectetur a erat nam at lectus. Id volutpat lacus laoreet non
+                                        curabitur gravida. Enim blandit volutpat maecenas volutpat blandit aliquam
+                                        etiam. Sed lectus vestibulum mattis ullamcorper. Sit amet volutpat consequat
+                                        mauris. At tempor commodo ullamcorper a lacus. Commodo quis imperdiet massa
+                                        tincidunt nunc pulvinar sapien et ligula. Donec enim diam vulputate ut.
+                                        Purus semper eget duis at tellus. Eget est lorem ipsum dolor sit amet. Non
+                                        nisi est sit amet. Vitae turpis massa sed elementum tempus egestas sed sed.
+                                        Id diam vel quam elementum. Nunc pulvinar sapien et ligula ullamcorper
+                                        malesuada proin. Lorem dolor sed viverra ipsum nunc aliquet bibendum enim.
+                                        Tempor id eu nisl nunc. Sit amet purus gravida quis.
 
-                                    Neque viverra justo nec ultrices dui. Et egestas quis ipsum suspendisse ultrices
-                                    gravida dictum fusce. Ac tortor vitae purus faucibus ornare. Lacus sed viverra
-                                    tellus in hac habitasse platea dictumst. Morbi tristique senectus et netus et
-                                    malesuada. Sed adipiscing diam donec adipiscing tristique risus nec feugiat in. Vel
-                                    eros donec ac odio. Natoque penatibus et magnis dis parturient. Dignissim cras
-                                    tincidunt lobortis feugiat. Mi ipsum faucibus vitae aliquet. Morbi quis commodo odio
-                                    aenean sed adipiscing diam.</p>
-                                <h4 id="light-3">Light 3</h4>
-                                <p>...</p>
-                                <h4 id="light-4">Light 4</h4>
-                                <p>...</p>
+                                        Turpis egestas maecenas pharetra convallis posuere morbi leo urna molestie.
+                                        Quam nulla porttitor massa id. Tincidunt augue interdum velit euismod. Diam
+                                        maecenas sed enim ut sem viverra aliquet eget. Laoreet id donec ultrices
+                                        tincidunt arcu. Feugiat pretium nibh ipsum consequat nisl. Volutpat maecenas
+                                        volutpat blandit aliquam etiam. Quis vel eros donec ac odio. Pharetra et
+                                        ultrices neque ornare aenean euismod elementum. Habitasse platea dictumst
+                                        vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Sodales ut
+                                        etiam sit amet nisl.
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
-                        <h1>Setting</h1>
+                    <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="status-list">
+                        <h1>Status</h1>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Optional JavaScript -->
+    <script>
+        document.getElementById('report-date').valueAsDate = new Date();
+    </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
