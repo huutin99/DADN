@@ -81,8 +81,20 @@ body {
   margin-top: 70px;
 }
 
+#login-content #log-body p {
+  font-size: medium;
+  margin: 20px;
+  opacity: 90%;
+}
+
 /*---------------------------------------------------------------------------------------------*/
 #signup-content #log-body h1 {
   color: lightseagreen;
+}
+
+#signup-content #log-body p {
+  font-size: medium;
+  margin: 20px;
+  opacity: 90%;
 }
 /*# sourceMappingURL=style1.css.map */
