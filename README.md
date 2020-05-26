@@ -2,5 +2,5 @@
 Project của thực tập đồ án đa ngành
 1. Vào folder project chạy lệnh pip install -r requirements
 2. Chạy server bằng lệnh flask run
-3. Cài Postgresql
+3. Cài Postgresql\n
 Mọi người tìm hiểu về Flask, Postgresql, với thư viện scikit-learn nha
