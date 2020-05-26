@@ -10,6 +10,7 @@ body {
   padding: 0;
   height: 700px;
   margin-top: 20px;
+
   #title {
     padding-right: 0;
   }
@@ -17,24 +18,172 @@ body {
 
 .navbar {
   background-color: lightskyblue;
-  span {
-    font-size: 30px;
+  padding: 0;
+
+  a {
+    padding: 0;
+    margin: 0;
+    height: 60px;
+
+    img {
+      height: 60px;
+    }
+
+    span {
+      margin-top: 10px;
+      font-size: 30px;
+    }
+  }
+
+  #nav-name {
+    i {
+      font-size: 40px;
+    }
+
+    p {
+      margin: 0;
+      padding: 8px 0 0 5px;
+    }
+  }
+
+  #nav-logout {
+    //padding-top: 15px;
+    i {
+      height: 100%;
+      padding-top: 2px;
+      font-size: 30px;
+    }
+
+    a {
+      height: 100%;
+      margin: 0;
+      padding: 5px 10px 0 5px;
+    }
   }
 }
 
 #content {
   padding-right: 30px;
+
   h1 {
     text-align: center;
     margin: 20px 0;
   }
-  #card-group {
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-row-gap: 20px;
-    .card {
-      width: 300px;
-      margin: auto;
+
+  #controller {
+    #ctrl-tab {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      border-style: solid;
+      border-width: 2px;
+      border-color: lightblue;
+      border-radius: 15px;
+      img {
+        display: block;
+        height: 90%;
+        margin: auto;
+        padding-top: 40px;
+      }
+    }
+    #ctrl-tab > div {
+      position: relative;
+      height: 400px;
+      h2 {
+        margin: 20px;
+        border-top: 1px solid rgb(61, 61, 61);
+      }
+      #ctrl-switch {
+        label {
+          margin-left: 20px;
+        }
+      }
+      #ctrl-adjust {
+        h2 {
+          margin-bottom: 20px;
+        }
+
+        output {
+          width: 320px;
+          font-size: large;
+          font-style: italic;
+          margin: 0 20px;
+          text-align: center;
+        }
+        & > div {
+          border-style: solid;
+          border-width: 1px;
+          border-radius: 10px;
+          width: 320px;
+          padding: 10px 5px 0 5px;
+          margin: 0 20px;
+          input {
+            width: 300px;
+            margin-left: 3px;
+          }
+        }
+      }
+      /* The switch - the box around the slider */
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
+
+      /* Hide default HTML checkbox */
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      /* The slider */
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+      }
+
+      input:checked + .slider {
+        background-color: #2196f3;
+      }
+
+      input:focus + .slider {
+        box-shadow: 0 0 1px #2196f3;
+      }
+
+      input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+      }
+
+      /* Rounded sliders */
+      .slider.round {
+        border-radius: 34px;
+      }
+
+      .slider.round:before {
+        border-radius: 50%;
+      }
     }
   }
 }
@@ -42,20 +191,25 @@ body {
 #report-content {
   display: grid;
   grid-template-columns: 30% 70%;
+
   #device-list {
     padding-right: 15px;
+
     a {
       border-radius: 0;
     }
+
     p {
       margin: 15px 0 5px 0px;
       padding-left: 5px;
       border-left-style: solid;
     }
+
     input {
       width: 100%;
     }
   }
+
   #report-list {
     height: 500px;
     overflow-y: scroll;
@@ -64,58 +218,4 @@ body {
 
 #chart-div {
   width: 100%;
-}
-
-/* The switch - the box around the slider */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-/* Hide default HTML checkbox */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* The slider */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-}
-
-input:checked + .slider {
-  background-color: #2196f3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
 }

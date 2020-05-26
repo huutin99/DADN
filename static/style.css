@@ -18,10 +18,43 @@ body {
 
 .navbar {
   background-color: lightskyblue;
+  padding: 0;
 }
 
-.navbar span {
+.navbar a {
+  padding: 0;
+  margin: 0;
+  height: 60px;
+}
+
+.navbar a img {
+  height: 60px;
+}
+
+.navbar a span {
+  margin-top: 10px;
   font-size: 30px;
+}
+
+.navbar #nav-name i {
+  font-size: 40px;
+}
+
+.navbar #nav-name p {
+  margin: 0;
+  padding: 8px 0 0 5px;
+}
+
+.navbar #nav-logout i {
+  height: 100%;
+  padding-top: 2px;
+  font-size: 30px;
+}
+
+.navbar #nav-logout a {
+  height: 100%;
+  margin: 0;
+  padding: 5px 10px 0 5px;
 }
 
 #content {
@@ -33,17 +66,125 @@ body {
   margin: 20px 0;
 }
 
-#content #card-group {
+#content #controller #ctrl-tab {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: auto auto;
-      grid-template-columns: auto auto;
-  grid-row-gap: 20px;
+  -ms-grid-columns: 50% 50%;
+      grid-template-columns: 50% 50%;
+  border-style: solid;
+  border-width: 2px;
+  border-color: lightblue;
+  border-radius: 15px;
 }
 
-#content #card-group .card {
-  width: 300px;
+#content #controller #ctrl-tab img {
+  display: block;
+  height: 90%;
   margin: auto;
+  padding-top: 40px;
+}
+
+#content #controller #ctrl-tab > div {
+  position: relative;
+  height: 400px;
+  /* The switch - the box around the slider */
+  /* Hide default HTML checkbox */
+  /* The slider */
+  /* Rounded sliders */
+}
+
+#content #controller #ctrl-tab > div h2 {
+  margin: 20px;
+  border-top: 1px solid #3d3d3d;
+}
+
+#content #controller #ctrl-tab > div #ctrl-switch label {
+  margin-left: 20px;
+}
+
+#content #controller #ctrl-tab > div #ctrl-adjust h2 {
+  margin-bottom: 20px;
+}
+
+#content #controller #ctrl-tab > div #ctrl-adjust output {
+  width: 320px;
+  font-size: large;
+  font-style: italic;
+  margin: 0 20px;
+  text-align: center;
+}
+
+#content #controller #ctrl-tab > div #ctrl-adjust > div {
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 10px;
+  width: 320px;
+  padding: 10px 5px 0 5px;
+  margin: 0 20px;
+}
+
+#content #controller #ctrl-tab > div #ctrl-adjust > div input {
+  width: 300px;
+  margin-left: 3px;
+}
+
+#content #controller #ctrl-tab > div .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+#content #controller #ctrl-tab > div .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+#content #controller #ctrl-tab > div .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+#content #controller #ctrl-tab > div .slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+#content #controller #ctrl-tab > div input:checked + .slider {
+  background-color: #2196f3;
+}
+
+#content #controller #ctrl-tab > div input:focus + .slider {
+  -webkit-box-shadow: 0 0 1px #2196f3;
+          box-shadow: 0 0 1px #2196f3;
+}
+
+#content #controller #ctrl-tab > div input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+#content #controller #ctrl-tab > div .slider.round {
+  border-radius: 34px;
+}
+
+#content #controller #ctrl-tab > div .slider.round:before {
+  border-radius: 50%;
 }
 
 #report-content {
@@ -78,59 +219,5 @@ body {
 
 #chart-div {
   width: 100%;
-}
-
-/* The switch - the box around the slider */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-/* Hide default HTML checkbox */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* The slider */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-}
-
-input:checked + .slider {
-  background-color: #2196f3;
-}
-
-input:focus + .slider {
-  -webkit-box-shadow: 0 0 1px #2196f3;
-          box-shadow: 0 0 1px #2196f3;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  transform: translateX(26px);
 }
 /*# sourceMappingURL=style.css.map */
