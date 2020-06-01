@@ -32,14 +32,14 @@ db = scoped_session(sessionmaker(bind=engine))
 @app.route("/")
 def index():
     if "logged_in" in session:
-        return redirect(url_for("dashboard", username = session["username"]))
+        return redirect(url_for("dashboard", username=session["username"]))
     return redirect(url_for("login"))
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if "logged_in" in session:
-        return redirect(url_for("dashboard", username = session["username"]))
+        return redirect(url_for("dashboard", username=session["username"]))
     error = ""
     if request.method == "POST":
         username = request.form["username"]
@@ -49,7 +49,7 @@ def login():
         if user:
             session['logged_in'] = True
             session['username'] = username
-            return redirect(url_for("dashboard", username = username))
+            return redirect(url_for("dashboard", username=username))
         else:
             error = "*Invalid credential, please try again."
     return render_template("login.html", error=error)
@@ -83,5 +83,6 @@ def signup():
 @app.route("/dashboard/<username>")
 def dashboard(username):
     if "logged_in" in session:
-        return render_template("dashboard.html", username = username)
+        return render_template("dashboard.html", username=session['username'])
     return redirect(url_for("login"))
+

@@ -10,3 +10,15 @@ class User(db.Model):
     pwd = db.Column(db.String, nullable=False)
     admin = db.Column(db.Boolean, nullable=False)
 
+class Sensor(db.Model):
+    __tablename__ = "Sensor"
+    id = db.Column(db.String, nullable=False)
+    value = db.Column(db.SmallInteger, nullable=False)
+    recv_time = db.Column(db.DateTime, primary_key=True)
+
+class Monitor(db.Model):
+    __tablename__ = "Monitor"
+    id = db.Column(db.String, nullable=False)
+    status = db.Column(db.SmallInteger, nullable=False)
+    intensity = db.Column(db.SmallInteger, nullable=False)
+    sent_time = db.Column(db.DateTime, primary_key=True)
