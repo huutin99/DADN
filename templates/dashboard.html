@@ -241,6 +241,8 @@
     </div>
     <!-- Optional JavaScript -->
     <script>
+
+        // Get data from server
         var data = JSON.parse("{{data}}".replace(/&#34;/g, '"')).data
         var dt_l1 = [], dt_l2 = [], dt_l3 = [], dt_l4 = []
         for (var i = data.length - 1; i >= 0; i--) {
@@ -251,6 +253,8 @@
                 case 4: dt_l4.push(data[i].value); break;
             }
         }
+
+        // Get data to display in overview chart
         var l1_chart = [], l2_chart = [], l3_chart = [], l4_chart = []
         if (dt_l1.length > 36) {
             for (var i = 6; i >= 0; i--) {
@@ -325,18 +329,20 @@
             chart_label.shift()
             chart_label.push(hour + ':' + min)
             console.log(chart_label)
+            update_chart_data()
             update_chart()
         }
 
+        // Function to update overview chart
         function update_chart() {
-            // Draw the overview chart
+            // Redraw the overview chart
             var ctx = document.getElementById('myChart').getContext('2d');
             var myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: chart_label,
                     datasets: [{
-                        label: '# of Votes',
+                        label: 'Light intensity',
                         data: l1_chart,
                         // backgroundColor: [
                         //     'rgba(255, 99, 132, 0.2)',
@@ -362,6 +368,11 @@
                     }
                 }
             });
+        }
+
+        // Function to update chart data
+        function update_chart_data(){
+            $.get()
         }
 
     </script>
