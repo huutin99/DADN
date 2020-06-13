@@ -77,16 +77,17 @@
                                 <div id="ctrl-adjust">
                                     <h2>Adjust intensity</h2>
                                     <div>
-                                        <input type="range" min="1" max="3" step="1" value="2" id="adjust-in"
+                                        <input type="range" min="0" max="255" step="1" value="" id="adjust-in"
                                             oninput="adjust(value)">
                                     </div>
-                                    <output for="adjust" id="adjust-out">Normal</output>
+                                    <output for="adjust" id="adjust-out"></output>
                                 </div>
                             </div>
                             <div id="ctrl-2">
                                 <img src="{{ url_for('static', filename='./img/bulb_normal.png') }}" alt="bulb"
                                     id="bulb_img">
                             </div>
+                            <button onclick="send_adjust()">Apply</button>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="report" role="tabpanel" aria-labelledby="report-list">
@@ -245,7 +246,7 @@
         // Get data from server
         var data = JSON.parse("{{data}}".replace(/&#34;/g, '"')).data
         var dt_l1 = [], dt_l2 = [], dt_l3 = [], dt_l4 = []
-        for (var i = data.length - 1; i >= 0; i--) {
+        for (var i = 0; i < data.length; i++) {
             switch (data[i].device_id) {
                 case 1: dt_l1.push(data[i].value); break;
                 case 2: dt_l2.push(data[i].value); break;
@@ -256,10 +257,8 @@
 
         // Get data to display in overview chart
         var l1_chart = [], l2_chart = [], l3_chart = [], l4_chart = []
-        if (dt_l1.length > 36) {
-            for (var i = 6; i >= 0; i--) {
-                l1_chart.push(dt_l1[i])
-            }
+        for (var i = dt_l1.length - 7; i < dt_l1.length; i++) {
+            l1_chart.push(dt_l1[i])
         }
 
         document.getElementById('report-date').valueAsDate = new Date();
@@ -270,16 +269,17 @@
             check()
         })
 
+        document.getElementById('adjust-in').value = l1_chart[l1_chart.length - 1]
         function adjust(val) {
             let bulb = document.getElementById('adjust-out')
             let bulb_img = document.getElementById('bulb_img')
-            if (val == 1) {
+            if (0 <= val && val < 80) {
                 bulb.value = "Low"
                 bulb.style.color = "lightseagreen"
                 bulb.style.textAlign = "left"
                 bulb_img.src = "{{ url_for('static', filename='./img/bulb_low.png') }}"
             }
-            else if (val == 2) {
+            else if (80 <= val && val < 170) {
                 bulb.value = "Normal"
                 bulb.style.color = "lightgreen"
                 bulb.style.textAlign = "center"
@@ -307,8 +307,6 @@
             }
         }
 
-        console.log(l1_chart)
-
         // Create chart label
         var chart_timer = setInterval(changeLabel, 300000)
         var chart_label = []
@@ -328,7 +326,6 @@
             var min = t.getMinutes() - t.getMinutes() % 5
             chart_label.shift()
             chart_label.push(hour + ':' + min)
-            console.log(chart_label)
             update_chart_data()
             update_chart()
         }
@@ -344,18 +341,13 @@
                     datasets: [{
                         label: 'Light intensity',
                         data: l1_chart,
-                        // backgroundColor: [
-                        //     'rgba(255, 99, 132, 0.2)',
-                        //     'rgba(54, 162, 235, 0.2)',
-                        //     'rgba(255, 206, 86, 0.2)',
-                        //     'rgba(75, 192, 192, 0.2)',
-                        //     'rgba(153, 102, 255, 0.2)',
-                        //     'rgba(255, 159, 64, 0.2)'
-                        // ],
+                        backgroundColor: [
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
                         borderColor: [
                             'rgba(255, 99, 132, 1)'
                         ],
-                        borderWidth: 1
+                        borderWidth: 3
                     }]
                 },
                 options: {
@@ -371,10 +363,24 @@
         }
 
         // Function to update chart data
-        function update_chart_data(){
-            $.get()
+        function update_chart_data() {
+            $.ajax({
+                url: "{{url_for('get_data', username = username)}}",
+                success: function (updated_data) {
+                    data = JSON.parse(updated_data.replace(/&#34;/g, '"')).data
+                }
+            })
         }
 
+        // Function send light adjustment
+        function send_adjust() {
+            if (!switch_btn.checked || val == 0) {
+                $.ajax({
+                    url: "{{url_for('recv_data')}}",
+                    data: 0
+                })
+            }
+        }
     </script>
 </body>
 

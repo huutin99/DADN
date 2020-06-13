@@ -6,4 +6,5 @@ flask_sqlalchemy
 SQLAlchemy
 gunicorn
 python-dotenv
+dnspython
 Flask-PyMongo

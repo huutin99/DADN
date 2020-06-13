@@ -6,6 +6,8 @@ from flask import Flask, session, redirect, url_for, request, render_template, f
 from flask_session import Session
 from datetime import timedelta, datetime
 from bson.json_util import dumps
+
+
 app = Flask(__name__)
 app.secret_key = b'123456789'
 app.config['SESSION_PERMANENT'] = False
@@ -61,12 +63,32 @@ def signup():
     return render_template("signup.html", succ=succ)
 
 
+def check_login(username):
+    if "logged_in" in session:
+        if username == session['username']:
+            return True
+    return False
+
+
 @app.route("/dashboard/<username>")
 def dashboard(username):
-    if "logged_in" in session:
-        data = db.db.Sensor.find_one({'date': datetime.now().strftime('%Y-%m-%d')})
-        # print('{"data":' + str(json.dumps(data['data'])) + '}')
-        return render_template("dashboard.html", username=session['username'], data = '{"data":' + str(json.dumps(data['data'])) + '}')
+    if check_login(username):
+        data = db.db.Sensor.find_one(
+            {'date': datetime.now().strftime('%Y-%m-%d')})
+        if data != None:
+            return render_template("dashboard.html", username=session['username'], data='{"data":' + str(json.dumps(data['data'])) + '}')
+        return render_template("dashboard.html", username=session['username'], data='{"data":[]}')
+    return redirect(url_for("login"))
+
+
+@app.route("/dashboard/<username>/data")
+def get_data(username):
+    if check_login(username):
+        data = db.db.Sensor.find_one(
+            {'date': datetime.now().strftime('%Y-%m-%d')})
+        if data != None:
+            return '{"data":' + str(json.dumps(data['data'])) + '}'
+        return json.dumps('{"data":[]}')
     return redirect(url_for("login"))
 
 
