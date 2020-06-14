@@ -6,14 +6,7 @@ from flask import Flask, session, redirect, url_for, request, render_template, f
 from flask_session import Session
 from datetime import timedelta, datetime
 from bson.json_util import dumps
-import paho.mqtt.client as mqtt
-
-broker_address = "13.76.250.158"
-client = mqtt.Client('P1')
-client.username_pw_set(username='BKvm2', password='Hcmut_CSE_2020')
-print("Connecting to broker")
-client.connect(broker_address, port=1883)
-print("Connected")
+import connect
 
 app = Flask(__name__)
 app.secret_key = b'123456789'
@@ -88,7 +81,7 @@ def dashboard(username):
     return redirect(url_for("login"))
 
 
-@app.route("/dashboard/<username>/data")
+@app.route("/dashboard/<username>/recv_data")
 def get_data(username):
     if check_login(username):
         data = db.db.Sensor.find_one(
@@ -98,6 +91,11 @@ def get_data(username):
         return json.dumps('{"data":[]}')
     return redirect(url_for("login"))
 
+
+@app.route("/dashboard/<username>/sent_data", methods = ['GET', 'POST'])
+def set_data(username):
+    if check_login(username):
+        pass
 
 if __name__ == '__main__':
     app.run(port=5000)

@@ -245,10 +245,11 @@
 
         // Get data from server
         var data = JSON.parse("{{data}}".replace(/&#34;/g, '"')).data
+        console.log(data)
         var dt_l1 = [], dt_l2 = [], dt_l3 = [], dt_l4 = []
         for (var i = 0; i < data.length; i++) {
             switch (data[i].device_id) {
-                case 1: dt_l1.push(data[i].value); break;
+                case "Light": dt_l1.push(data[i].value); break;
                 case 2: dt_l2.push(data[i].value); break;
                 case 3: dt_l3.push(data[i].value); break;
                 case 4: dt_l4.push(data[i].value); break;
@@ -368,6 +369,7 @@
                 url: "{{url_for('get_data', username = username)}}",
                 success: function (updated_data) {
                     data = JSON.parse(updated_data.replace(/&#34;/g, '"')).data
+                    console.log(data)
                 }
             })
         }
@@ -375,11 +377,22 @@
         // Function send light adjustment
         function send_adjust() {
             if (!switch_btn.checked || val == 0) {
-                $.ajax({
-                    url: "{{url_for('recv_data')}}",
-                    data: 0
-                })
+                var data = {
+                    "device_id": "LightD",
+                    "values": ["0", "0"]
+                }
             }
+            else {
+                // var val = document.getElementById('adjust-in').value
+                data = {
+                    "device_id": "LightD",
+                    "values": ["1", String(val)]
+                }
+            }
+            $.ajax({
+                url: "{{url_for('set_data', username = usename)}}",
+                data: data
+            })
         }
     </script>
 </body>
