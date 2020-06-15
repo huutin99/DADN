@@ -309,10 +309,10 @@
         }
 
         // Create chart label
-        var chart_timer = setInterval(changeLabel, 300000)
+        var chart_timer = setInterval(changeLabel, parseInt("{{loop_time*1000}}"))
         var chart_label = []
         for (var i = 6; i >= 0; i--) {
-            var t = new Date(new Date().getTime() - (6 - i) * 300000)
+            var t = new Date(new Date().getTime() - (6 - i) * parseInt("{{loop_time*1000}}"))
             var hour = t.getHours()
             var min = t.getMinutes() - t.getMinutes() % 5
             chart_label[i] = hour + ':' + min
@@ -376,22 +376,28 @@
 
         // Function send light adjustment
         function send_adjust() {
+            var val = document.getElementById('adjust-in').value
+            var switch_btn = document.getElementById('switch-btn')
             if (!switch_btn.checked || val == 0) {
                 var data = {
-                    "device_id": "LightD",
-                    "values": ["0", "0"]
+                    device_id: "LightD",
+                    values: ["0", "0"]
                 }
             }
             else {
                 // var val = document.getElementById('adjust-in').value
                 data = {
-                    "device_id": "LightD",
-                    "values": ["1", String(val)]
+                    device_id: "LightD",
+                    values: ["1", String(val)]
                 }
             }
+            console.log(data)
             $.ajax({
-                url: "{{url_for('set_data', username = usename)}}",
-                data: data
+                method: 'POST',
+                url: "{{url_for('set_data', username = username)}}",
+                data: JSON.stringify(data),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json'
             })
         }
     </script>

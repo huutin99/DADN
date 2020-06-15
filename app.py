@@ -76,8 +76,8 @@ def dashboard(username):
         data = db.db.Sensor.find_one(
             {'date': datetime.now().strftime('%Y-%m-%d')})
         if data != None:
-            return render_template("dashboard.html", username=session['username'], data='{"data":' + str(json.dumps(data['data'])) + '}')
-        return render_template("dashboard.html", username=session['username'], data='{"data":[]}')
+            return render_template("dashboard.html", username=session['username'], data='{"data":' + str(json.dumps(data['data'])) + '}', loop_time=connect.loop_time)
+        return render_template("dashboard.html", username=session['username'], data='{"data":[]}', loop_time=connect.loop_time)
     return redirect(url_for("login"))
 
 
@@ -92,10 +92,17 @@ def get_data(username):
     return redirect(url_for("login"))
 
 
-@app.route("/dashboard/<username>/sent_data", methods = ['GET', 'POST'])
+@app.route("/dashboard/<username>/sent_data", methods=['GET', 'POST'])
 def set_data(username):
     if check_login(username):
-        pass
+        data = request.json['values']
+        print(request.json)
+        # if data != None:
+        #     connect.client.on_publish = connect.on_publish
+        #     connect.client.publish("Topic/LightD", )
+        #     return 'OK'
+        return 'Error'
+        # print(data)
 
 if __name__ == '__main__':
     app.run(port=5000)
