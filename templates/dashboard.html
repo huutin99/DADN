@@ -87,7 +87,9 @@
                                 <img src="{{ url_for('static', filename='./img/bulb_normal.png') }}" alt="bulb"
                                     id="bulb_img">
                             </div>
-                            <button onclick="send_adjust()">Apply</button>
+                            <button onclick="send_adjust()"
+                                style="height: 40px; width: 100px; margin: auto; margin-bottom: 10px;">Apply</button>
+                            <p id="display-me" style="font-size: 20px; padding-top: 5px; padding-left: 80px"></p>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="report" role="tabpanel" aria-labelledby="report-list">
@@ -299,8 +301,8 @@
             let ctrl_adjust = document.getElementById('ctrl-adjust').style
             let ctrl_2 = document.getElementById('ctrl-2').style
             if (!checked) {
-                ctrl_2.display = "none"
-                ctrl_adjust.display = "none"
+                ctrl_2.display = "block"
+                ctrl_adjust.display = "block"
             }
             else {
                 ctrl_2.display = "block"
@@ -391,13 +393,24 @@
                     values: ["1", String(val)]
                 }
             }
-            console.log(data)
+            var e = document.getElementById('display-me')
+            console.log(data['values'])
+            if (data['values'][0] == "0" || data['values'][1] == "0") {
+                e.innerHTML = "You turned off the device."
+            }
+            else {
+                e.innerHTML = "You change the value to " + data['values'][1]
+            }
             $.ajax({
                 method: 'POST',
                 url: "{{url_for('set_data', username = username)}}",
                 data: JSON.stringify(data),
                 contentType: 'application/json; charset=utf-8',
-                dataType: 'json'
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data)
+                }
+
             })
         }
     </script>

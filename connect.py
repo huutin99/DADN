@@ -19,15 +19,15 @@ def on_message(client, userdata, message):
     global recv_data
     global save_time
     save_time += 1
-    recv_data = str(message.payload.decode("utf-8")).replace("\n", "").replace(" ", "")
+    recv_data = str(message.payload.decode("utf-8"))#.replace("\n", "").replace(" ", "")
     print("recdata", recv_data)
     print(save_time)
     # Insert data to database
-    if save_time == 5:
+    if save_time >= 5:
     # print(threading.active_count())
-        save_time = 0
         insertdata.insert_data(recv_data)
-        print(a)
+        save_time -= 5
+        # print(a)
 
 
 def on_publish(client, userdata, mid):

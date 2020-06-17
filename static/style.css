@@ -84,9 +84,15 @@ body {
   padding-top: 40px;
 }
 
+#content #controller #ctrl-tab button {
+  height: 50px;
+  width: 100px;
+  margin: auto;
+}
+
 #content #controller #ctrl-tab > div {
   position: relative;
-  height: 400px;
+  height: 300px;
   /* The switch - the box around the slider */
   /* Hide default HTML checkbox */
   /* The slider */

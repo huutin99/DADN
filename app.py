@@ -111,7 +111,7 @@ def set_data(username):
         #     connect.client.on_publish = connect.on_publish
         #     connect.client.publish("Topic/LightD", )
         #     return 'OK'
-        return 'Error'
+        return 'OK'
         # print(data)
 
 if __name__ == '__main__':

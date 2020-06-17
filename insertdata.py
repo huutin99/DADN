@@ -21,5 +21,5 @@ def insert_data(recv_data):
 
 def store_request(sent_data):
     search_time = datetime.now().strftime('%Y-%m-%d')
-    check_data = db.db.Board.find_one({'date': search_time})
+    # check_data = db.db.Board.find_one({'date': search_time})
     db.db.Board.insert_one(sent_data)
