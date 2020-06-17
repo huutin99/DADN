@@ -309,10 +309,10 @@
         }
 
         // Create chart label
-        var chart_timer = setInterval(changeLabel, parseInt("{{loop_time*1000}}"))
+        var chart_timer = setInterval(changeLabel, parseInt("{{(loop_time + 1)*5000}}"))
         var chart_label = []
         for (var i = 6; i >= 0; i--) {
-            var t = new Date(new Date().getTime() - (6 - i) * parseInt("{{loop_time*1000}}"))
+            var t = new Date(new Date().getTime() - (6 - i) * parseInt("{{(loop_time + 1)*5000}}"))
             var hour = t.getHours()
             var min = t.getMinutes() - t.getMinutes() % 5
             chart_label[i] = hour + ':' + min

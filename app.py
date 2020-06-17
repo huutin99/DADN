@@ -7,6 +7,7 @@ from flask_session import Session
 from datetime import timedelta, datetime
 from bson.json_util import dumps
 import connect
+import insertdata
 
 app = Flask(__name__)
 app.secret_key = b'123456789'
@@ -95,8 +96,17 @@ def get_data(username):
 @app.route("/dashboard/<username>/sent_data", methods=['GET', 'POST'])
 def set_data(username):
     if check_login(username):
-        data = request.json['values']
-        print(request.json)
+        store_data = request.json
+        send_data = request.json
+        print(store_data)
+        print(send_data)
+        send_data = "["+str(send_data).replace("\'", "\"")+"]"
+        print(send_data)
+        connect.client.on_publish = connect.on_publish
+        ret = connect.client.publish("Topic/LightD",send_data) 
+        print("ret is", ret)
+        store_data['time'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        insertdata.store_request(store_data)
         # if data != None:
         #     connect.client.on_publish = connect.on_publish
         #     connect.client.publish("Topic/LightD", )

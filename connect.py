@@ -4,6 +4,7 @@ import threading
 import db
 from datetime import timedelta, datetime
 import insertdata
+import json
 
 #######################################
 recv_data = 0
@@ -18,17 +19,19 @@ def on_message(client, userdata, message):
     global recv_data
     global save_time
     save_time += 1
-    recv_data = str(message.payload.decode("utf-8"))
+    recv_data = str(message.payload.decode("utf-8")).replace("\n", "").replace(" ", "")
+    print("recdata", recv_data)
     print(save_time)
     # Insert data to database
     if save_time == 5:
     # print(threading.active_count())
-        insertdata.insert_data(recv_data)
         save_time = 0
+        insertdata.insert_data(recv_data)
+        print(a)
 
 
-def on_publish(client, userdata, result):
-    print("publish message result ", result)
+def on_publish(client, userdata, mid):
+    print("publish message result ", mid)
 
 def on_connect(client, userdata, flags, rc):
     global flag_connected
@@ -64,7 +67,6 @@ loop_time = 59
 
 def loop_get_data():
     # client.connect(broker_address, port=1883)  # connect to broker
-    print(flag_connected)
     client.loop_start()
     client.subscribe("Topic/Light")
     time.sleep(1)

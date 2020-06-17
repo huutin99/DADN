@@ -5,8 +5,9 @@ import json
 
 def insert_data(recv_data):
     search_time = datetime.now().strftime('%Y-%m-%d')
-    check_data = db.db.Sensor.find_one({'date': search_time})
     data = json.loads(recv_data[1:-1])
+    check_data = db.db.Sensor.find_one({'date': search_time})
+
     # print(int(data["values"][0]))
     if check_data != None:
         db.db.Sensor.update({'date': search_time}, {
@@ -17,3 +18,8 @@ def insert_data(recv_data):
         db.db.Sensor.insert_one({'date': search_time, 'data': [data]})
         return False
     return False
+
+def store_request(sent_data):
+    search_time = datetime.now().strftime('%Y-%m-%d')
+    check_data = db.db.Board.find_one({'date': search_time})
+    db.db.Board.insert_one(sent_data)
