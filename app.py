@@ -15,6 +15,8 @@ app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=1)
 
+user_right = 0
+
 
 @app.route('/')
 def index():
@@ -43,6 +45,8 @@ def login():
 
 @app.route("/logout")
 def logout():
+    global user_right
+    user_right = 0
     session.clear()
     return redirect(url_for("login"))
 
@@ -96,6 +100,8 @@ def get_data(username):
 @app.route("/dashboard/<username>/sent_data", methods=['GET', 'POST'])
 def set_data(username):
     if check_login(username):
+        global user_right
+        user_right = 1
         store_data = request.json
         send_data = request.json
         print(store_data)
@@ -103,16 +109,20 @@ def set_data(username):
         send_data = "["+str(send_data).replace("\'", "\"")+"]"
         print(send_data)
         connect.client.on_publish = connect.on_publish
-        ret = connect.client.publish("Topic/LightD",send_data) 
+        ret = connect.client.publish("Topic/LightD", send_data)
         print("ret is", ret)
-        store_data['time'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        insertdata.store_request(store_data)
+        a, b = ret
+        if a == 0:
+            store_data['time'] = datetime.now().strftime('%H:%M:%S')
+            insertdata.store_request(store_data)
+            return 'OK'
+        return 'Error'
         # if data != None:
         #     connect.client.on_publish = connect.on_publish
         #     connect.client.publish("Topic/LightD", )
         #     return 'OK'
-        return 'OK'
         # print(data)
+
 
 if __name__ == '__main__':
     app.run(port=5000)

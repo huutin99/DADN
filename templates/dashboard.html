@@ -252,7 +252,7 @@
         for (var i = 0; i < data.length; i++) {
             switch (data[i].device_id) {
                 case "Light": dt_l1.push(data[i].value); break;
-                case 2: dt_l2.push(data[i].value); break;
+                case "Light12": dt_l2.push(data[i].value); break;
                 case 3: dt_l3.push(data[i].value); break;
                 case 4: dt_l4.push(data[i].value); break;
             }
@@ -406,11 +406,7 @@
                 url: "{{url_for('set_data', username = username)}}",
                 data: JSON.stringify(data),
                 contentType: 'application/json; charset=utf-8',
-                dataType: 'json',
-                success: function (data) {
-                    console.log(data)
-                }
-
+                dataType: 'json'
             })
         }
     </script>
