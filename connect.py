@@ -43,10 +43,10 @@ def on_disconnect(client, userdata, rc):
 
 
 ########################################
-broker_address = "13.76.250.158"
+broker_address = "52.187.125.59"
 print("creating new instance")
 client = mqtt.Client("P1")  # create new instance
-client.username_pw_set(username='BKvm2', password='Hcmut_CSE_2020')
+client.username_pw_set(username='BKvm', password='Hcmut_CSE_2020')
 client.on_message = on_message  # attach function to callback
 print("connecting to broker")
 client.connect(broker_address, port=1883, keepalive=500)
@@ -62,7 +62,7 @@ client.loop_stop()
 
 
 # Thread loop getting data every 5 minutes
-loop_time = 59
+loop_time = 19
 
 
 def loop_get_data():

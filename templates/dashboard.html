@@ -67,29 +67,57 @@
                         <h1>Controller</h1>
                         <div id="ctrl-tab">
                             <div id="ctrl-1">
-                                <div id="ctrl-switch">
-                                    <h2>Turn on/off</h2>
+                                <div id="auto-mode">
+                                    <h2>Auto-mode</h2>
                                     <label class="switch">
-                                        <input type="checkbox" id="switch-btn" checked onclick="check()">
+                                        <input type="checkbox" checked onclick="auto_check()">
                                         <span class="slider"></span>
                                     </label>
                                 </div>
-                                <div id="ctrl-adjust">
-                                    <h2>Adjust intensity</h2>
-                                    <div>
-                                        <input type="range" min="0" max="255" step="1" value="" id="adjust-in"
-                                            oninput="adjust(value)">
+                                <div id="manual-mode">
+                                    <h2>Manual-mode</h2>
+                                    <div id="ctrl-switch">
+                                        <h4>Turn light on/off</h4>
+                                        <label class="switch">
+                                            <input type="checkbox" id="switch-btn" checked onclick="check()">
+                                            <span class="slider"></span>
+                                        </label>
                                     </div>
-                                    <output for="adjust" id="adjust-out"></output>
+                                    <div id="ctrl-adjust">
+                                        <h4>Adjust intensity</h4>
+                                        <div id="range-wrap">
+                                            <input type="range" min="0" max="255" step="1" value="" id="adjust-in"
+                                                oninput="adjust(value)">
+                                        </div>
+                                        <div id="range-label">
+                                            <output for="adjust" id="adjust-out"></output>
+                                        </div>
+                                    </div>
+                                    <div id="timer">
+                                        <h4>Timer</h4>
+                                        <label class="switch">
+                                            <input type="checkbox" id="timer-btn" onclick="timer_set()">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             <div id="ctrl-2">
                                 <img src="{{ url_for('static', filename='./img/bulb_normal.png') }}" alt="bulb"
                                     id="bulb_img">
+                                <div id="timer-config">
+                                    <label for="timer-start">Between:</label><br>
+                                    <input type="time" id="timer-start" name="timer-start"><br>
+                                    <label for="timer-end">And:</label><br>
+                                    <input type="time" id="timer-end" name="timer-end"><br>
+                                    <label for="timer-freq">Frequency:</label><br>
+                                    <select id="timer-freq">
+                                        <option value="0">One time</option>
+                                        <option value="1">Daily</option>
+                                    </select>
+                                </div>
                             </div>
-                            <button onclick="send_adjust()"
-                                style="height: 40px; width: 100px; margin: auto; margin-bottom: 10px;">Apply</button>
-                            <p id="display-me" style="font-size: 20px; padding-top: 5px; padding-left: 80px"></p>
+                            <button onclick="send_adjust()" id="apply-btn" class="btn btn-primary">Apply</button>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="report" role="tabpanel" aria-labelledby="report-list">
@@ -242,6 +270,9 @@
             </div>
         </div>
     </div>
+
+    <!--****************************************************************************************************************-->
+
     <!-- Optional JavaScript -->
     <script>
 
@@ -270,28 +301,31 @@
             var switch_btn = document.getElementById('switch-btn')
             adjust(val)
             check()
+            timer_set()
         })
 
         document.getElementById('adjust-in').value = l1_chart[l1_chart.length - 1]
         function adjust(val) {
             let bulb = document.getElementById('adjust-out')
             let bulb_img = document.getElementById('bulb_img')
+            let range_label = document.getElementById('range-label')
+            range_label.style.right = 255 - val + 'px'
             if (0 <= val && val < 80) {
-                bulb.value = "Low"
+                bulb.value = val
                 bulb.style.color = "lightseagreen"
-                bulb.style.textAlign = "left"
+                // bulb.style.textAlign = "left"
                 bulb_img.src = "{{ url_for('static', filename='./img/bulb_low.png') }}"
             }
             else if (80 <= val && val < 170) {
-                bulb.value = "Normal"
+                bulb.value = val
                 bulb.style.color = "lightgreen"
-                bulb.style.textAlign = "center"
+                // bulb.style.textAlign = "center"
                 bulb_img.src = "{{ url_for('static', filename='./img/bulb_normal.png') }}"
             }
             else {
-                bulb.value = "High"
+                bulb.value = val
                 bulb.style.color = "lightcoral"
-                bulb.style.textAlign = "right"
+                // bulb.style.textAlign = "right"
                 bulb_img.src = "{{ url_for('static', filename='./img/bulb_high.png') }}"
             }
         }
@@ -393,14 +427,13 @@
                     values: ["1", String(val)]
                 }
             }
-            var e = document.getElementById('display-me')
-            console.log(data['values'])
-            if (data['values'][0] == "0" || data['values'][1] == "0") {
-                e.innerHTML = "You turned off the device."
+            if (!timer_set()) {
+                data['schedule'] = 0
             }
             else {
-                e.innerHTML = "You change the value to " + data['values'][1]
+                data['schedule'] = timer_set()
             }
+            console.log(data)
             $.ajax({
                 method: 'POST',
                 url: "{{url_for('set_data', username = username)}}",
@@ -408,6 +441,39 @@
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json'
             })
+        }
+
+        //Implement timer setting
+        function timer_set() {
+            var timer_config = document.getElementById("timer-config")
+            var timer_btn = document.getElementById("timer-btn")
+            if (!timer_btn.checked) {
+                timer_config.style.display = "none"
+                return false
+            }
+            else {
+                timer_config.style.display = "block"
+                var timer_start = document.getElementById("timer-start").value
+                var timer_end = document.getElementById("timer-end").value
+                var timer_freq = document.getElementById("timer-freq").value
+
+                var s = timer_start.split(':');
+                var e = timer_end.split(':');
+
+                var end = parseInt(e[0]) * 60 + parseInt(e[1]);
+                var start = parseInt(s[0]) * 60 + parseInt(s[1]);
+
+                var elapsedMs = ((end - start) >= 0) ? end - start : 24 * 60 - (start - end);
+
+                console.log(timer_freq)
+                console.log(parseInt(elapsedMs / 60) + " hours " + elapsedMs % 60 + " minutes")
+                var timer_data = {
+                    start: timer_start,
+                    duration: elapsedMs,
+                    freq: parseInt(timer_freq)
+                }
+                return timer_data
+            }
         }
     </script>
 </body>

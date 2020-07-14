@@ -8,6 +8,11 @@ from datetime import timedelta, datetime
 from bson.json_util import dumps
 import connect
 import insertdata
+import copy
+import schedule
+import publishschedule
+import time
+import threading
 
 app = Flask(__name__)
 app.secret_key = b'123456789'
@@ -15,8 +20,22 @@ app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=1)
 
-user_right = 0
+user_right = False
+timer = False
+auto_mode = True
+stop_threads = False
 
+# Create schedule thread
+def run_schedule():
+    while True:
+        schedule.run_pending()
+        # print("Running schedule thread, schedule list:", schedule.jobs)
+        time.sleep(5)
+        global stop_threads 
+        if stop_threads: 
+            break
+sched_thread = threading.Thread(target = run_schedule)
+sched_thread.start()
 
 @app.route('/')
 def index():
@@ -46,7 +65,8 @@ def login():
 @app.route("/logout")
 def logout():
     global user_right
-    user_right = 0
+    user_right = False
+    auto_mode = True
     session.clear()
     return redirect(url_for("login"))
 
@@ -101,20 +121,35 @@ def get_data(username):
 def set_data(username):
     if check_login(username):
         global user_right
-        user_right = 1
+        user_right = True
+        auto_mode = False
         store_data = request.json
-        send_data = request.json
+        # print(store_data)
+        send_data = copy.deepcopy(request.json)
+        send_data.pop('schedule')
         print(store_data)
-        print(send_data)
+        # print(send_data)
         send_data = "["+str(send_data).replace("\'", "\"")+"]"
         print(send_data)
-        connect.client.on_publish = connect.on_publish
-        ret = connect.client.publish("Topic/LightD", send_data)
-        print("ret is", ret)
-        a, b = ret
-        if a == 0:
-            store_data['time'] = datetime.now().strftime('%H:%M:%S')
+        store_data['time'] = datetime.now().strftime('%H:%M:%S')
+        if store_data['schedule'] == 0:
+            connect.client.on_publish = connect.on_publish
+            ret = connect.client.publish("Topic/LightD", send_data)
+            print("ret is", ret)
+        # print(store_data)
+            a, b = ret
+            if a == 0:
+                insertdata.store_request(store_data)
+                return 'OK'
+        else:
             insertdata.store_request(store_data)
+            schedule.clear()
+            global sched_thread, stop_threads
+            stop_threads = True
+            sched_thread.join()
+            print("Stoped old schedule")
+            sched_thread = threading.Thread(target = publishschedule.make_schedule, args = (store_data,))
+            sched_thread.start()
             return 'OK'
         return 'Error'
         # if data != None:

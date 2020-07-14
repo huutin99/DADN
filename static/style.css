@@ -67,6 +67,7 @@ body {
 }
 
 #content #controller #ctrl-tab {
+  height: 530px;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 50% 50%;
@@ -79,7 +80,7 @@ body {
 
 #content #controller #ctrl-tab img {
   display: block;
-  height: 90%;
+  height: 100%;
   margin: auto;
   padding-top: 40px;
 }
@@ -88,6 +89,26 @@ body {
   height: 50px;
   width: 100px;
   margin: auto;
+}
+
+#content #controller #ctrl-tab .switch {
+  margin-left: 20px;
+}
+
+#content #controller #ctrl-tab #ctrl-2 #timer-config {
+  border-style: solid;
+  height: 200px;
+  margin-top: 20px;
+  margin-right: 10px;
+  border-radius: 10px;
+  border-width: 1px;
+}
+
+#content #controller #ctrl-tab #apply-btn {
+  height: 40px;
+  width: 100px;
+  margin: auto;
+  margin-bottom: 10px;
 }
 
 #content #controller #ctrl-tab > div {
@@ -113,25 +134,34 @@ body {
 }
 
 #content #controller #ctrl-tab > div #ctrl-adjust output {
-  width: 320px;
   font-size: large;
   font-style: italic;
-  margin: 0 20px;
   text-align: center;
 }
 
-#content #controller #ctrl-tab > div #ctrl-adjust > div {
+#content #controller #ctrl-tab > div #ctrl-adjust #range-wrap {
   border-style: solid;
   border-width: 1px;
   border-radius: 10px;
-  width: 320px;
+  width: 275px;
   padding: 10px 5px 0 5px;
   margin: 0 20px;
 }
 
-#content #controller #ctrl-tab > div #ctrl-adjust > div input {
-  width: 300px;
+#content #controller #ctrl-tab > div #ctrl-adjust #range-wrap input {
+  width: 255px;
   margin-left: 3px;
+}
+
+#content #controller #ctrl-tab > div #ctrl-adjust #range-label {
+  width: 255px;
+  margin-left: 37px;
+  text-align: right;
+  position: relative;
+}
+
+#content #controller #ctrl-tab > div #manual-mode > div {
+  margin-left: 40px;
 }
 
 #content #controller #ctrl-tab > div .switch {

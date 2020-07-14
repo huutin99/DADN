@@ -72,6 +72,7 @@ body {
 
   #controller {
     #ctrl-tab {
+      height: 530px;
       display: grid;
       grid-template-columns: 50% 50%;
       border-style: solid;
@@ -80,7 +81,7 @@ body {
       border-radius: 15px;
       img {
         display: block;
-        height: 90%;
+        height: 100%;
         margin: auto;
         padding-top: 40px;
       }
@@ -88,6 +89,27 @@ body {
         height: 50px;
         width: 100px;
         margin: auto;
+      }
+      .switch {
+        margin-left: 20px;
+      }
+
+      #ctrl-2 {
+        #timer-config {
+          border-style: solid;
+          height: 200px;
+          margin-top: 20px;
+          margin-right: 10px;
+          border-radius: 10px;
+          border-width: 1px;
+        }
+      }
+
+      #apply-btn {
+        height: 40px;
+        width: 100px;
+        margin: auto;
+        margin-bottom: 10px;
       }
     }
     #ctrl-tab > div {
@@ -108,25 +130,35 @@ body {
         }
 
         output {
-          width: 320px;
           font-size: large;
           font-style: italic;
-          margin: 0 20px;
+          // margin: 0 10px;
           text-align: center;
         }
-        & > div {
+        #range-wrap {
           border-style: solid;
           border-width: 1px;
           border-radius: 10px;
-          width: 320px;
+          width: 275px;
           padding: 10px 5px 0 5px;
           margin: 0 20px;
           input {
-            width: 300px;
+            width: 255px;
             margin-left: 3px;
           }
         }
+        #range-label {
+          width: 255px;
+          margin-left: 37px;
+          text-align: right;
+          position: relative;
+        }
       }
+
+      #manual-mode > div {
+        margin-left: 40px;
+      }
+
       /* The switch - the box around the slider */
       .switch {
         position: relative;
