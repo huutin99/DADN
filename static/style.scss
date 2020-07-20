@@ -102,6 +102,13 @@ body {
           margin-right: 10px;
           border-radius: 10px;
           border-width: 1px;
+          label {
+            margin-left: 20px;
+            margin-top: 5px;
+          }
+          input, select{
+            margin-left: 20px;
+          }
         }
       }
 

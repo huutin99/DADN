@@ -33,4 +33,5 @@ def make_schedule(data):
         # print("Rerun schedule, schedule list:", schedule.jobs)
         time.sleep(5)
         if app.stop_threads: 
+            print("Stoped old schedule")
             break

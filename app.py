@@ -26,16 +26,17 @@ auto_mode = True
 stop_threads = False
 
 # Create schedule thread
-def run_schedule():
-    while True:
-        schedule.run_pending()
-        # print("Running schedule thread, schedule list:", schedule.jobs)
-        time.sleep(5)
-        global stop_threads 
-        if stop_threads: 
-            break
-sched_thread = threading.Thread(target = run_schedule)
-sched_thread.start()
+# def run_schedule():
+#     while True:
+#         schedule.run_pending()
+#         print("Running schedule thread, schedule list:", schedule.jobs)
+#         time.sleep(5)
+#         global stop_threads 
+#         if stop_threads: 
+#             print("Stoped old schedule")
+#             break
+# sched_thread = threading.Thread(target = run_schedule)
+# sched_thread.start()
 
 @app.route('/')
 def index():
@@ -132,31 +133,51 @@ def set_data(username):
         send_data = "["+str(send_data).replace("\'", "\"")+"]"
         print(send_data)
         store_data['time'] = datetime.now().strftime('%H:%M:%S')
-        if store_data['schedule'] == 0:
-            connect.client.on_publish = connect.on_publish
-            ret = connect.client.publish("Topic/LightD", send_data)
-            print("ret is", ret)
+        connect.client.on_publish = connect.on_publish
+        ret = connect.client.publish("Topic/LightD", send_data)
+        print("ret is", ret)
         # print(store_data)
-            a, b = ret
-            if a == 0:
-                insertdata.store_request(store_data)
-                return 'OK'
-        else:
-            insertdata.store_request(store_data)
+        if store_data['schedule'] != 0:
             schedule.clear()
-            global sched_thread, stop_threads
+            global stop_threads
             stop_threads = True
-            sched_thread.join()
-            print("Stoped old schedule")
+            # sched_thread.join()
             sched_thread = threading.Thread(target = publishschedule.make_schedule, args = (store_data,))
             sched_thread.start()
+        a, b = ret
+        if a == 0:
+            insertdata.store_request(store_data)
             return 'OK'
-        return 'Error'
-        # if data != None:
-        #     connect.client.on_publish = connect.on_publish
-        #     connect.client.publish("Topic/LightD", )
-        #     return 'OK'
-        # print(data)
+        return 'Error'        
+    return redirect(url_for("login"))
+
+
+@app.route("/dashboard/<username>/auto_mode", methods=['POST'])
+def change_uright(username):
+    if check_login(username):
+        auto = request.json
+        print(auto)
+        global auto_mode, user_right
+        auto_mode = auto['auto']
+        user_right = True if auto_mode == False else False
+        print(auto_mode, user_right)
+        return 'OK'
+    return redirect(url_for("login"))
+
+
+@app.route("/dashboard/<username>/report", methods=['GET', 'POST'])
+def get_report(username):
+    if check_login(username):
+        report = request.json
+        print(report)
+        if report['type'] == 'sensor':
+            check_data = db.db.Sensor.find_one({'date': report['date']})
+        else:
+            check_data = db.db.Board.find_one({'date': report['date']})
+        if check_data != None:
+            return '{"data":' + str(json.dumps(check_data['data'])) + '}'
+        return '{"data":[]}'
+    return redirect(url_for("login"))
 
 
 if __name__ == '__main__':

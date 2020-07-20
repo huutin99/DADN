@@ -104,6 +104,15 @@ body {
   border-width: 1px;
 }
 
+#content #controller #ctrl-tab #ctrl-2 #timer-config label {
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+#content #controller #ctrl-tab #ctrl-2 #timer-config input, #content #controller #ctrl-tab #ctrl-2 #timer-config select {
+  margin-left: 20px;
+}
+
 #content #controller #ctrl-tab #apply-btn {
   height: 40px;
   width: 100px;

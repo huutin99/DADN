@@ -39,7 +39,7 @@ def store_request(sent_data):
     search_time = datetime.now().strftime('%Y-%m-%d')
     check_data = db.db.Board.find_one({'date': search_time})
     schedule = copy.deepcopy(sent_data['schedule'])
-    if schedule['freq'] == 0:
+    if schedule != 0 and schedule['freq'] == 0:
         schedule['date'] = datetime.now().strftime('%Y-%m-%d')
     print(schedule)
     db.db.Board.update({'doc': 'schedule'}, {'$push': {'data': schedule}})

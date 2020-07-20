@@ -45,13 +45,13 @@
         </nav>
         <div class="row">
             <div class="col-3" id="title">
-                <div class="list-group list-group-flush" id="list-tab" role="tablist">
+                <div class="list-group list-group-flush" id="page-list-tab" role="tablist">
                     <a class="list-group-item list-group-item-action active" id="overview-list" data-toggle="list"
                         href="#overview" role="tab" aria-controls="overview">Overview</a>
                     <a class="list-group-item list-group-item-action" id="controller-list" data-toggle="list"
                         href="#controller" role="tab" aria-controls="controller">Controller</a>
                     <a class="list-group-item list-group-item-action" id="report-list" data-toggle="list" href="#report"
-                        role="tab" aria-controls="report">Report</a>
+                        role="tab" aria-controls="report" onclick="get_report()">Report</a>
                     <a class="list-group-item list-group-item-action" id="status-list" data-toggle="list"
                         href="#list-settings" role="tab" aria-controls="status">Status</a>
                 </div>
@@ -70,7 +70,7 @@
                                 <div id="auto-mode">
                                     <h2>Auto-mode</h2>
                                     <label class="switch">
-                                        <input type="checkbox" checked onclick="auto_check()">
+                                        <input type="checkbox" id="automode-btn" checked onclick="auto_check()">
                                         <span class="slider"></span>
                                     </label>
                                 </div>
@@ -124,140 +124,28 @@
                         <h1>Report</h1>
                         <div id="report-content">
                             <div id="device-list">
-                                <div class="list-group" id="list-tab" role="tablist">
+                                <div class="list-group" id="report-list-tab" role="tablist">
                                     <a class="list-group-item list-group-item-action active list-group-item-info"
                                         id="list-home-list" data-toggle="list" href="#report-sensor" role="tab"
                                         aria-controls="home">Sensor
-                                        <span class="badge badge-primary badge-pill">14</span>
                                     </a>
                                     <a class="list-group-item list-group-item-action list-group-item-info"
                                         id="list-profile-list" data-toggle="list" href="#report-controller" role="tab"
                                         aria-controls="profile">Controller
-                                        <span class="badge badge-primary badge-pill">14</span>
                                     </a>
                                 </div>
                                 <p>Choose date:</p>
-                                <input type="date" id="report-date">
+                                <input type="date" id="report-date" oninput="get_report()">
                             </div>
                             <div id="report-list">
                                 <div class="tab-content" id="nav-tabContent">
                                     <div class="tab-pane fade show active" id="report-sensor" role="tabpanel"
                                         aria-labelledby="list-home-list">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. In mollis nunc sed id
-                                        semper risus in hendrerit. Imperdiet dui accumsan sit amet nulla facilisi
-                                        morbi tempus. Volutpat blandit aliquam etiam erat velit scelerisque. Mi sit
-                                        amet mauris commodo quis imperdiet massa. At consectetur lorem donec massa.
-                                        Augue ut lectus arcu bibendum at varius vel pharetra vel. Leo urna molestie
-                                        at elementum eu. Sed arcu non odio euismod lacinia at quis risus sed.
-                                        Suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Blandit
-                                        massa enim nec dui nunc mattis enim ut tellus. Facilisi cras fermentum odio
-                                        eu feugiat. Id neque aliquam vestibulum morbi blandit cursus risus at.
-                                        Luctus accumsan tortor posuere ac ut consequat semper viverra. Commodo elit
-                                        at imperdiet dui accumsan sit amet nulla facilisi.
-
-                                        Id porta nibh venenatis cras sed felis. Quis viverra nibh cras pulvinar
-                                        mattis. Felis eget nunc lobortis mattis aliquam. Commodo viverra maecenas
-                                        accumsan lacus vel facilisis. Ac tincidunt vitae semper quis lectus nulla.
-                                        Id ornare arcu odio ut sem nulla. In fermentum posuere urna nec tincidunt
-                                        praesent semper feugiat nibh. Nulla facilisi cras fermentum odio eu.
-                                        Suspendisse faucibus interdum posuere lorem ipsum dolor sit amet. Eget
-                                        nullam non nisi est sit amet facilisis.
-
-                                        Habitant morbi tristique senectus et. Lobortis mattis aliquam faucibus
-                                        purus. Aliquam sem et tortor consequat id porta. At ultrices mi tempus
-                                        imperdiet nulla malesuada pellentesque elit. Quisque non tellus orci ac
-                                        auctor augue mauris augue neque. Duis ultricies lacus sed turpis tincidunt
-                                        id. Nec feugiat in fermentum posuere urna nec tincidunt praesent. Fermentum
-                                        leo vel orci porta. Cras adipiscing enim eu turpis egestas. Donec pretium
-                                        vulputate sapien nec. Vitae tempus quam pellentesque nec nam. Lobortis
-                                        mattis aliquam faucibus purus in massa tempor. Nulla posuere sollicitudin
-                                        aliquam ultrices sagittis. Tellus mauris a diam maecenas sed enim ut.
-                                        Rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt lobortis.
-                                        Nec sagittis aliquam malesuada bibendum arcu vitae elementum curabitur
-                                        vitae. Id aliquet risus feugiat in ante. Habitasse platea dictumst quisque
-                                        sagittis purus sit amet volutpat consequat.
-
-                                        Enim blandit volutpat maecenas volutpat blandit aliquam etiam. Odio morbi
-                                        quis commodo odio aenean sed. Cursus turpis massa tincidunt dui ut ornare.
-                                        Dictum non consectetur a erat nam at lectus. Id volutpat lacus laoreet non
-                                        curabitur gravida. Enim blandit volutpat maecenas volutpat blandit aliquam
-                                        etiam. Sed lectus vestibulum mattis ullamcorper. Sit amet volutpat consequat
-                                        mauris. At tempor commodo ullamcorper a lacus. Commodo quis imperdiet massa
-                                        tincidunt nunc pulvinar sapien et ligula. Donec enim diam vulputate ut.
-                                        Purus semper eget duis at tellus. Eget est lorem ipsum dolor sit amet. Non
-                                        nisi est sit amet. Vitae turpis massa sed elementum tempus egestas sed sed.
-                                        Id diam vel quam elementum. Nunc pulvinar sapien et ligula ullamcorper
-                                        malesuada proin. Lorem dolor sed viverra ipsum nunc aliquet bibendum enim.
-                                        Tempor id eu nisl nunc. Sit amet purus gravida quis.
-
-                                        Turpis egestas maecenas pharetra convallis posuere morbi leo urna molestie.
-                                        Quam nulla porttitor massa id. Tincidunt augue interdum velit euismod. Diam
-                                        maecenas sed enim ut sem viverra aliquet eget. Laoreet id donec ultrices
-                                        tincidunt arcu. Feugiat pretium nibh ipsum consequat nisl. Volutpat maecenas
-                                        volutpat blandit aliquam etiam. Quis vel eros donec ac odio. Pharetra et
-                                        ultrices neque ornare aenean euismod elementum. Habitasse platea dictumst
-                                        vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Sodales ut
-                                        etiam sit amet nisl.
+                                        <div id="sensor-table"></div>
                                     </div>
                                     <div class="tab-pane fade" id="report-monitor" role="tabpanel"
                                         aria-labelledby="list-profile-list">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. In mollis nunc sed id
-                                        semper risus in hendrerit. Imperdiet dui accumsan sit amet nulla facilisi
-                                        morbi tempus. Volutpat blandit aliquam etiam erat velit scelerisque. Mi sit
-                                        amet mauris commodo quis imperdiet massa. At consectetur lorem donec massa.
-                                        Augue ut lectus arcu bibendum at varius vel pharetra vel. Leo urna molestie
-                                        at elementum eu. Sed arcu non odio euismod lacinia at quis risus sed.
-                                        Suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Blandit
-                                        massa enim nec dui nunc mattis enim ut tellus. Facilisi cras fermentum odio
-                                        eu feugiat. Id neque aliquam vestibulum morbi blandit cursus risus at.
-                                        Luctus accumsan tortor posuere ac ut consequat semper viverra. Commodo elit
-                                        at imperdiet dui accumsan sit amet nulla facilisi.
-
-                                        Id porta nibh venenatis cras sed felis. Quis viverra nibh cras pulvinar
-                                        mattis. Felis eget nunc lobortis mattis aliquam. Commodo viverra maecenas
-                                        accumsan lacus vel facilisis. Ac tincidunt vitae semper quis lectus nulla.
-                                        Id ornare arcu odio ut sem nulla. In fermentum posuere urna nec tincidunt
-                                        praesent semper feugiat nibh. Nulla facilisi cras fermentum odio eu.
-                                        Suspendisse faucibus interdum posuere lorem ipsum dolor sit amet. Eget
-                                        nullam non nisi est sit amet facilisis.
-
-                                        Habitant morbi tristique senectus et. Lobortis mattis aliquam faucibus
-                                        purus. Aliquam sem et tortor consequat id porta. At ultrices mi tempus
-                                        imperdiet nulla malesuada pellentesque elit. Quisque non tellus orci ac
-                                        auctor augue mauris augue neque. Duis ultricies lacus sed turpis tincidunt
-                                        id. Nec feugiat in fermentum posuere urna nec tincidunt praesent. Fermentum
-                                        leo vel orci porta. Cras adipiscing enim eu turpis egestas. Donec pretium
-                                        vulputate sapien nec. Vitae tempus quam pellentesque nec nam. Lobortis
-                                        mattis aliquam faucibus purus in massa tempor. Nulla posuere sollicitudin
-                                        aliquam ultrices sagittis. Tellus mauris a diam maecenas sed enim ut.
-                                        Rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt lobortis.
-                                        Nec sagittis aliquam malesuada bibendum arcu vitae elementum curabitur
-                                        vitae. Id aliquet risus feugiat in ante. Habitasse platea dictumst quisque
-                                        sagittis purus sit amet volutpat consequat.
-
-                                        Enim blandit volutpat maecenas volutpat blandit aliquam etiam. Odio morbi
-                                        quis commodo odio aenean sed. Cursus turpis massa tincidunt dui ut ornare.
-                                        Dictum non consectetur a erat nam at lectus. Id volutpat lacus laoreet non
-                                        curabitur gravida. Enim blandit volutpat maecenas volutpat blandit aliquam
-                                        etiam. Sed lectus vestibulum mattis ullamcorper. Sit amet volutpat consequat
-                                        mauris. At tempor commodo ullamcorper a lacus. Commodo quis imperdiet massa
-                                        tincidunt nunc pulvinar sapien et ligula. Donec enim diam vulputate ut.
-                                        Purus semper eget duis at tellus. Eget est lorem ipsum dolor sit amet. Non
-                                        nisi est sit amet. Vitae turpis massa sed elementum tempus egestas sed sed.
-                                        Id diam vel quam elementum. Nunc pulvinar sapien et ligula ullamcorper
-                                        malesuada proin. Lorem dolor sed viverra ipsum nunc aliquet bibendum enim.
-                                        Tempor id eu nisl nunc. Sit amet purus gravida quis.
-
-                                        Turpis egestas maecenas pharetra convallis posuere morbi leo urna molestie.
-                                        Quam nulla porttitor massa id. Tincidunt augue interdum velit euismod. Diam
-                                        maecenas sed enim ut sem viverra aliquet eget. Laoreet id donec ultrices
-                                        tincidunt arcu. Feugiat pretium nibh ipsum consequat nisl. Volutpat maecenas
-                                        volutpat blandit aliquam etiam. Quis vel eros donec ac odio. Pharetra et
-                                        ultrices neque ornare aenean euismod elementum. Habitasse platea dictumst
-                                        vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Sodales ut
-                                        etiam sit amet nisl.
+                                        <div id="monitor-table"></div>
                                     </div>
                                 </div>
                             </div>
@@ -301,11 +189,13 @@
             var switch_btn = document.getElementById('switch-btn')
             adjust(val)
             check()
+            document.getElementById('automode-btn').checked = true
             timer_set()
         })
 
         document.getElementById('adjust-in').value = l1_chart[l1_chart.length - 1]
         function adjust(val) {
+            document.getElementById('automode-btn').checked = false
             let bulb = document.getElementById('adjust-out')
             let bulb_img = document.getElementById('bulb_img')
             let range_label = document.getElementById('range-label')
@@ -331,6 +221,7 @@
         }
 
         function check() {
+            document.getElementById('automode-btn').checked = false
             let checked = document.getElementById('switch-btn').checked
             let ctrl_adjust = document.getElementById('ctrl-adjust').style
             let ctrl_2 = document.getElementById('ctrl-2').style
@@ -345,12 +236,12 @@
         }
 
         // Create chart label
-        var chart_timer = setInterval(changeLabel, parseInt("{{(loop_time + 1)*5000}}"))
+        var chart_timer = setInterval(changeLabel, 60000)
         var chart_label = []
         for (var i = 6; i >= 0; i--) {
-            var t = new Date(new Date().getTime() - (6 - i) * parseInt("{{(loop_time + 1)*5000}}"))
+            var t = new Date(new Date().getTime() - (6 - i) * 60000)
             var hour = t.getHours()
-            var min = t.getMinutes() - t.getMinutes() % 5
+            var min = t.getMinutes() //- t.getMinutes() % 5
             chart_label[i] = hour + ':' + min
         }
 
@@ -360,7 +251,7 @@
         function changeLabel() {
             var t = new Date()
             var hour = t.getHours()
-            var min = t.getMinutes() - t.getMinutes() % 5
+            var min = t.getMinutes() //- t.getMinutes() % 5
             chart_label.shift()
             chart_label.push(hour + ':' + min)
             update_chart_data()
@@ -475,6 +366,134 @@
                 return timer_data
             }
         }
+
+        //Send auto-mode
+        function auto_check() {
+            let auto_btn = document.getElementById('automode-btn').checked
+            $.ajax({
+                method: 'POST',
+                url: "{{url_for('change_uright', username = username)}}",
+                data: JSON.stringify({
+                    auto: auto_btn
+                }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json'
+            })
+        }
+
+        //Get and display report
+        function get_report() {
+            var report_date = $('#report-date').val()
+            var a = $('#report-list-tab a[href="#report-sensor"].active')
+            if (a.length != 0) {
+                get_sup_report('sensor', report_date)
+            }
+            var b = $('#report-list-tab a[href="#report-controller"].active')
+            if (b.length != 0) {
+                get_sup_report('controller', report_date)
+            }
+            $('#report-list-tab a[href="#report-sensor"]').on('click', function () {
+                get_sup_report('sensor', report_date)
+            })
+            $('#report-list-tab a[href="#report-controller"]').on('click', function () {
+                get_sup_report('controller', report_date)
+            })
+        }
+
+        function get_sup_report(type, date) {
+            console.log(type + date)
+            $.ajax({
+                method: 'POST',
+                url: "{{url_for('get_report', username = username)}}",
+                data: JSON.stringify({
+                    type: type,
+                    date: date
+                }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (data) {
+                    create_table(type, data['data'])
+                }
+            })
+        }
+
+        function create_table(type, data) {
+            if (type == 'sensor') {
+                sensor_table = ""
+                if (data.length == 0) {
+                    sensor_table = "No record yet."
+                }
+                else {
+                    sensor_table = 
+                    `<table class="table table-sm table-hover table-bordered">
+                        <thead class="thead-dark"> 
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Device</th>
+                                <th scope="col">Value</th>
+                            </tr>
+                        </thead >
+                        <tbody>`
+                    for (i = 0; i < data.length; i++) {
+                        sensor_table += 
+                        `<tr>
+                            <th scope="row">` + (i + 1).toString() + `</th>
+                            <td>` + data[i]['device_id'] + `</td>
+                            <td>` + data[i]['values'] + `</td>
+                        </tr>`
+                    }
+                    sensor_table += 
+                        `</tbody>
+                    </table >`
+                }
+                document.getElementById('sensor-table').innerHTML = sensor_table
+            }
+            else {
+                monitor_table = ""
+                if (data.length == 0) {
+                    monitor_table = "No record yet."
+                }
+                else {
+                    monitor_table = 
+                    `<table class="table table-sm table-hover table-bordered">
+                        <thead class="thead-dark"> 
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Device</th>
+                                <th scope="col">Value</th>
+                                <th scope="col">Setting time</th>
+                                <th scope="col">Schedule</th>
+                            </tr>
+                        </thead >
+                        <tbody>`
+                    for (i = 0; i < data.length; i++) {
+                        monitor_table += 
+                        `<tr>
+                            <th scope="row">` + (i + 1).toString() + `</th>
+                            <td>` + data[i]['device_id'] + `</td>
+                            <td>` + data[i]['values'].toString() + `</td>
+                            <td>` + data[i]['time'] + `</td>
+                            <td>` + JSON.stringify(data[i]['schedule']) + `</td>
+                        </tr>`
+                    }
+                    monitor_table += 
+                        `</tbody>
+                    </table >`
+                }
+                document.getElementById('sensor-table').innerHTML = monitor_table
+            }
+        }
+
+        // function get_report() {
+        //     rtype = document.getElementById()
+        //     $.ajax({
+        //         method:'GET',
+        //         url: "",
+        //         data: JSON.stringify({
+        //             type: 
+        //         })
+        //     })
+        // }
     </script>
 </body>
 
