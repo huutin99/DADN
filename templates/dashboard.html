@@ -53,7 +53,7 @@
                     <a class="list-group-item list-group-item-action" id="report-list" data-toggle="list" href="#report"
                         role="tab" aria-controls="report" onclick="get_report()">Report</a>
                     <a class="list-group-item list-group-item-action" id="status-list" data-toggle="list"
-                        href="#list-settings" role="tab" aria-controls="status">Status</a>
+                        href="#status" role="tab" aria-controls="status" onclick="get_status()">Status</a>
                 </div>
             </div>
             <div class="col-9" id="content">
@@ -151,8 +151,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="status-list">
+                    <div class="tab-pane fade" id="status" role="tabpanel" aria-labelledby="status-list">
                         <h1>Status</h1>
+                        <div id="status-tab">
+                            <h2>Current light status <span id="light-status"></span></h2>
+                            <h2>Mode: <span id="mode-status"></span></h2>
+                            <h2>Next schedule on <span id="schedule-status"></span></h2>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -320,9 +325,11 @@
             }
             if (!timer_set()) {
                 data['schedule'] = 0
+                document.getElementById('automode-btn').checked = false
             }
             else {
                 data['schedule'] = timer_set()
+                document.getElementById('automode-btn').checked = true
             }
             console.log(data)
             $.ajax({
@@ -332,6 +339,7 @@
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json'
             })
+            auto_check()
         }
 
         //Implement timer setting
@@ -484,16 +492,32 @@
             }
         }
 
-        // function get_report() {
-        //     rtype = document.getElementById()
-        //     $.ajax({
-        //         method:'GET',
-        //         url: "",
-        //         data: JSON.stringify({
-        //             type: 
-        //         })
-        //     })
-        // }
+
+        //Get and display status
+        function get_status() {
+            document.getElementById('light-status').innerHTML = l1_chart[l1_chart.length - 1]
+            $.ajax({
+                url: "{{url_for('get_status', username = username)}}",
+                success: function(status_data) {
+                    console.log(status_data)
+                    var data = JSON.parse(status_data.replace(/&#34;/g, '"'))
+                    var umode = data['umode']
+                    var amode = data['amode']
+                    var schedule = data['schedule']
+                    console.log(umode, amode, schedule)
+                    if (umode == "True") {
+                        document.getElementById('mode-status').innerHTML = 'Manual'
+                    }
+                    else if (amode == "False") {
+                        document.getElementById('mode-status').innerHTML = 'On schedule'
+                    }
+                    else {
+                        document.getElementById('mode-status').innerHTML = 'Auto'
+                    }
+                    document.getElementById('schedule-status').innerHTML = schedule
+                }
+            })
+        }
     </script>
 </body>
 

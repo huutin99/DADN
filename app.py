@@ -138,6 +138,8 @@ def set_data(username):
         print("ret is", ret)
         # print(store_data)
         if store_data['schedule'] != 0:
+            user_right = False
+            auto_mode = True
             schedule.clear()
             global stop_threads
             stop_threads = True
@@ -177,6 +179,13 @@ def get_report(username):
         if check_data != None:
             return '{"data":' + str(json.dumps(check_data['data'])) + '}'
         return '{"data":[]}'
+    return redirect(url_for("login"))
+
+
+@app.route("/dashboard/<username>/status", methods=['GET', 'POST'])
+def get_status(username):
+    if check_login(username):
+        return '{"umode":"' + str(user_right) + '","amode":"' + str(auto_mode) + '","schedule":"' + str(schedule.next_run()) + '"}'
     return redirect(url_for("login"))
 
 

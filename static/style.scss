@@ -230,6 +230,26 @@ body {
       }
     }
   }
+
+  #status {
+    #status-tab {
+      height: 530px;
+      border-style: solid;
+      border-width: 2px;
+      border-color: lightblue;
+      border-radius: 15px;
+      h2 {
+        margin: 30px;
+        padding-left: 5px;
+        border-left-style: solid;
+        border-width: 2px;
+        border-color: lightslategray;
+      }
+      span {
+        color: lightseagreen;
+      }
+    }
+  }
 }
 
 #report-content {
