@@ -121,9 +121,7 @@ def get_data(username):
 @app.route("/dashboard/<username>/sent_data", methods=['GET', 'POST'])
 def set_data(username):
     if check_login(username):
-        global user_right
-        user_right = True
-        auto_mode = False
+        global user_right, auto_mode
         store_data = request.json
         # print(store_data)
         send_data = copy.deepcopy(request.json)
@@ -138,14 +136,16 @@ def set_data(username):
         print("ret is", ret)
         # print(store_data)
         if store_data['schedule'] != 0:
-            user_right = False
-            auto_mode = True
+            if user_right == False:
+                auto_mode = True
             schedule.clear()
             global stop_threads
             stop_threads = True
             # sched_thread.join()
             sched_thread = threading.Thread(target = publishschedule.make_schedule, args = (store_data,))
             sched_thread.start()
+        user_right = True
+        auto_mode = False
         a, b = ret
         if a == 0:
             insertdata.store_request(store_data)
