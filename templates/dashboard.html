@@ -200,7 +200,7 @@
 
         document.getElementById('adjust-in').value = l1_chart[l1_chart.length - 1]
         function adjust(val) {
-            document.getElementById('automode-btn').checked = false
+            // document.getElementById('automode-btn').checked = false
             let bulb = document.getElementById('adjust-out')
             let bulb_img = document.getElementById('bulb_img')
             let range_label = document.getElementById('range-label')
@@ -226,7 +226,7 @@
         }
 
         function check() {
-            document.getElementById('automode-btn').checked = false
+            // document.getElementById('automode-btn').checked = false
             let checked = document.getElementById('switch-btn').checked
             let ctrl_adjust = document.getElementById('ctrl-adjust').style
             let ctrl_2 = document.getElementById('ctrl-2').style
@@ -329,7 +329,7 @@
             }
             else {
                 data['schedule'] = timer_set()
-                document.getElementById('automode-btn').checked = true
+                // document.getElementById('automode-btn').checked = true
             }
             console.log(data)
             $.ajax({

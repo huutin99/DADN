@@ -65,7 +65,7 @@ def login():
 
 @app.route("/logout")
 def logout():
-    global user_right
+    global user_right, auto_mode
     user_right = False
     auto_mode = True
     session.clear()
@@ -144,8 +144,9 @@ def set_data(username):
             # sched_thread.join()
             sched_thread = threading.Thread(target = publishschedule.make_schedule, args = (store_data,))
             sched_thread.start()
-        user_right = True
-        auto_mode = False
+        else:
+            user_right = True
+            auto_mode = False
         a, b = ret
         if a == 0:
             insertdata.store_request(store_data)
